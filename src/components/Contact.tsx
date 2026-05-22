@@ -4,6 +4,7 @@ import React, { useEffect, useRef } from "react";
 import { gsap } from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import WhatsAppPopup from "./WhatsAppPopup";
+import { ShieldCheckIcon, MarkerIcon, PhoneIcon, EmailIcon, ClockIcon } from "./Icons";
 
 if (typeof window !== "undefined") {
   gsap.registerPlugin(ScrollTrigger);
@@ -50,7 +51,7 @@ export default function Contact() {
         <div className="grid gap-6 sm:gap-10 lg:grid-cols-2 lg:items-start">
           <div className="space-y-6 contact-left">
             <div className="inline-flex items-center gap-3 text-xs font-semibold uppercase tracking-[0.16em] text-slate-500 sm:text-sm sm:tracking-[0.3em]">
-              <img src="https://img.icons8.com/ios-glyphs/30/0f172a/trust.png" className="h-4 w-4" alt="Trust" />
+              <ShieldCheckIcon className="h-4 w-4" />
               Find Our Clinic
             </div>
             <div className="space-y-2.5">
@@ -66,7 +67,7 @@ export default function Contact() {
               <div className="rounded-none border border-slate-200 bg-white p-4 sm:p-5">
                 <div className="flex items-start gap-3 text-slate-950 mb-2 sm:gap-4">
                   <div className="flex h-11 w-11 items-center justify-center rounded-none bg-slate-900 text-white">
-                    <img src="https://img.icons8.com/ios-glyphs/30/ffffff/marker.png" className="h-5 w-5" alt="Location" />
+                    <MarkerIcon className="h-5 w-5" />
                   </div>
                   <div className="min-w-0">
                     <p className="text-xs uppercase tracking-[0.3em] text-slate-500">Location</p>
@@ -79,7 +80,7 @@ export default function Contact() {
               <div className="rounded-none border border-slate-200 bg-white p-4 sm:p-5">
                 <div className="flex items-start gap-3 text-slate-950 mb-2 sm:gap-4">
                   <div className="flex h-11 w-11 items-center justify-center rounded-none bg-slate-900 text-white">
-                    <img src="https://img.icons8.com/ios-glyphs/30/ffffff/phone.png" className="h-5 w-5" alt="Phone" />
+                    <PhoneIcon className="h-5 w-5" />
                   </div>
                   <div className="min-w-0">
                     <p className="text-xs uppercase tracking-[0.3em] text-slate-500">Phone</p>
@@ -92,7 +93,7 @@ export default function Contact() {
               <div className="rounded-none border border-slate-200 bg-white p-4 sm:p-5">
                 <div className="flex items-start gap-3 text-slate-950 mb-2 sm:gap-4">
                   <div className="flex h-11 w-11 items-center justify-center rounded-none bg-slate-900 text-white">
-                    <img src="https://img.icons8.com/ios-glyphs/30/ffffff/new-post.png" className="h-5 w-5" alt="Email" />
+                    <EmailIcon className="h-5 w-5" />
                   </div>
                   <div className="min-w-0">
                     <p className="text-xs uppercase tracking-[0.3em] text-slate-500">Email</p>
@@ -104,7 +105,7 @@ export default function Contact() {
               <div className="rounded-none border border-slate-200 bg-white p-4 sm:p-5">
                 <div className="flex items-start gap-3 text-slate-950 mb-2 sm:gap-4">
                   <div className="flex h-11 w-11 items-center justify-center rounded-none bg-slate-900 text-white">
-                    <img src="https://img.icons8.com/ios-glyphs/30/ffffff/clock.png" className="h-5 w-5" alt="Hours" />
+                    <ClockIcon className="h-5 w-5" />
                   </div>
                   <div className="min-w-0">
                     <p className="text-xs uppercase tracking-[0.3em] text-slate-500">Hours</p>

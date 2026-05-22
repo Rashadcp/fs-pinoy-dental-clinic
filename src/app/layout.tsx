@@ -15,7 +15,7 @@ export const metadata: Metadata = {
   keywords: ["dental clinic", "gentle dentist", "teeth cleaning", "teeth whitening", "orthodontics", "implants", "painless dentistry", "local dentist", "FS Pinoy Dental", "Philippines dentist"],
   metadataBase: new URL("https://fspinoydental.com"), // Placeholder URL, replace with actual
   openGraph: {
-    title: "FS Pinoy Dental Clinic | Gentle Dental Care",
+    title: "FS Pinoy Dental Clinic | Dubai",
     description: "Welcome to a different kind of dental experience. We focus on gentle, stress-free, and painless dental care.",
     url: "https://fspinoydental.com",
     siteName: "FS Pinoy Dental Clinic",
@@ -24,7 +24,7 @@ export const metadata: Metadata = {
         url: "/og-image.jpg", // Placeholder for actual OG image
         width: 1200,
         height: 630,
-        alt: "FS Pinoy Dental Clinic - Warm, Gentle Dental Care",
+        alt: "FS Pinoy Dental Clinic",
       },
     ],
     locale: "en_US",

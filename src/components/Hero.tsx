@@ -3,6 +3,7 @@
 import React, { useEffect, useRef } from "react";
 import { gsap } from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
+import { ArrowRightIcon } from "./Icons";
 
 if (typeof window !== "undefined") {
   gsap.registerPlugin(ScrollTrigger);
@@ -68,7 +69,7 @@ export default function Hero({ onOpenBooking }: HeroProps) {
           const rect = card.getBoundingClientRect();
           const x = e.clientX - rect.left - rect.width / 2;
           const y = e.clientY - rect.top - rect.height / 2;
-          const rotateX = -(y / rect.height) * 12; // max 12 degrees
+          const rotateX = -(y / rect.height) * 12;
           const rotateY = (x / rect.width) * 12;
           
           gsap.to(card, {
@@ -118,7 +119,7 @@ export default function Hero({ onOpenBooking }: HeroProps) {
                 className="inline-flex w-full items-center justify-center gap-2 rounded-none bg-brand-500 px-6 py-3 text-xs font-semibold uppercase tracking-[0.08em] text-white transition duration-200 hover:bg-brand-600 cursor-pointer sm:w-auto sm:px-7 sm:text-sm sm:tracking-[0.12em]"
               >
                 See available times
-                <img src="https://img.icons8.com/ios-glyphs/30/ffffff/long-arrow-right.png" className="h-4 w-4" alt="Arrow Right" />
+                <ArrowRightIcon className="h-4 w-4" />
               </button>
             </div>
 
@@ -146,6 +147,7 @@ export default function Hero({ onOpenBooking }: HeroProps) {
                   alt="A friendly dentist and happy patient smiling at FS Pinoy Dental Clinic"
                   className="h-full w-full object-cover"
                   loading="eager"
+                  fetchPriority="high"
                 />
               </div>
 
@@ -162,5 +164,3 @@ export default function Hero({ onOpenBooking }: HeroProps) {
     </section>
   );
 }
-
-

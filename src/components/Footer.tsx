@@ -1,18 +1,19 @@
 "use client";
- 
+
 import React from "react";
 import Link from "next/link";
- 
+import Image from "next/image";
+
 export default function Footer() {
   const currentYear = new Date().getFullYear();
- 
+
   return (
     <footer className="bg-slate-950 text-slate-400 py-10 border-t border-slate-800">
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
         <div className="grid gap-8 md:grid-cols-4">
           <div className="space-y-2.5">
             <Link href="/" className="inline-block">
-              <img src="/fs-logo-horizontal.png" alt="FS Pinoy Dental Clinic" className="h-10 w-auto object-contain" />
+              <Image src="/fs-logo-horizontal.png" alt="FS Pinoy Dental Clinic" width={180} height={40} className="h-10 w-auto object-contain" />
             </Link>
             <p className="text-sm leading-relaxed text-slate-400">
               High-quality dental care that combines precision with a calm patient experience.
@@ -21,7 +22,7 @@ export default function Footer() {
               <a href="mailto:hello@fspinoydental.com" className="hover:text-white transition-colors">hello@fspinoydental.com</a>
             </p>
           </div>
- 
+
           <div className="space-y-2 text-sm">
             <h4 className="font-semibold text-white uppercase tracking-[0.2em]">Navigation</h4>
             <ul className="space-y-1.5">
@@ -35,7 +36,7 @@ export default function Footer() {
           <div className="space-y-2 text-sm">
             <h4 className="font-semibold text-white uppercase tracking-[0.2em]">Popular Services</h4>
             <ul className="space-y-1.5 text-slate-400">
-              <li>Preventive & General Care</li>
+              <li>Preventive &amp; General Care</li>
               <li>Cosmetic Dentistry</li>
               <li>Orthodontic Services</li>
               <li>Restorative Dentistry</li>
@@ -53,13 +54,11 @@ export default function Footer() {
             <div className="pt-2">
               <span className="block text-[11px] font-semibold uppercase tracking-wider text-slate-400 mb-2">Split in 4 installments</span>
               <div className="flex items-center gap-3">
-                {/* Tamara Official Logo */}
                 <div className="bg-white rounded-md p-1 flex items-center justify-center transition hover:opacity-90 h-8">
-                  <img src="/tamara-logo.png" alt="Tamara" className="h-6 w-auto object-contain" />
+                  <Image src="/tamara-logo.png" alt="Tamara" width={80} height={24} className="h-6 w-auto object-contain" />
                 </div>
-                {/* Tabby Official Logo */}
                 <div className="bg-white rounded-md p-1 flex items-center justify-center transition hover:opacity-90 h-8">
-                  <img src="/tabby-logo.png" alt="Tabby" className="h-6 w-auto object-contain" />
+                  <Image src="/tabby-logo.png" alt="Tabby" width={80} height={24} className="h-6 w-auto object-contain" />
                 </div>
               </div>
             </div>
@@ -76,5 +75,3 @@ export default function Footer() {
     </footer>
   );
 }
-
-

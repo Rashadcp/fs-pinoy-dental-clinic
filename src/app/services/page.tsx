@@ -4,6 +4,7 @@ import React, { useState, useEffect, useRef } from "react";
 import Link from "next/link";
 import { gsap } from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
+import { PulseIcon, CalendarIcon, HelpIcon, ChevronDownIcon } from "@/components/Icons";
 
 if (typeof window !== "undefined") {
   gsap.registerPlugin(ScrollTrigger);
@@ -158,9 +159,7 @@ function FAQItem({ question, answer }: { question: string; answer: string }) {
         className="w-full flex items-center justify-between p-5 text-left font-bold text-slate-900 transition hover:bg-slate-50"
       >
         <span className="text-sm sm:text-base">{question}</span>
-        <img
-          src="https://img.icons8.com/ios-glyphs/30/64748b/chevron-down.png"
-          alt="Chevron Down"
+        <ChevronDownIcon
           className={`h-4 w-4 transition-transform duration-300 ${isOpen ? "rotate-180" : ""}`}
         />
       </button>
@@ -285,7 +284,7 @@ export default function ServicesPage() {
         <div className="absolute inset-0 bg-[radial-gradient(#cfe6fe_1px,transparent_1px)] [background-size:24px_24px] opacity-30" />
         <div className="relative mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 text-center space-y-4 services-hero-content">
           <span className="inline-flex max-w-full items-center gap-2 rounded-none border border-slate-200 bg-white px-3 py-1.5 text-[11px] font-semibold uppercase tracking-[0.16em] text-brand-700 shadow-sm sm:px-4 sm:text-xs sm:tracking-[0.3em]">
-            <img src="https://img.icons8.com/ios-glyphs/30/1d4ed8/pulse.png" alt="Heartbeat Icon" className="h-4 w-4" />
+            <PulseIcon className="h-4 w-4" />
             Complete Dental Solutions
           </span>
           <h1 className="text-3xl font-extrabold tracking-tight text-slate-950 sm:text-6xl max-w-4xl mx-auto leading-tight">
@@ -382,7 +381,7 @@ export default function ServicesPage() {
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
           <div className="expectation-header text-center max-w-3xl mx-auto mb-10 sm:mb-14">
             <span className="inline-flex max-w-full items-center gap-2 rounded-none border border-slate-200 bg-slate-50 px-3 py-1.5 text-[11px] font-semibold uppercase tracking-[0.16em] text-slate-600 shadow-sm sm:px-4 sm:text-xs sm:tracking-[0.3em]">
-              <img src="https://img.icons8.com/ios-glyphs/30/2563eb/calendar.png" alt="Calendar Icon" className="h-4 w-4" />
+              <CalendarIcon className="h-4 w-4" />
               Your Cozy Journey with Us
             </span>
             <h2 className="text-3xl font-extrabold tracking-tight text-slate-950 sm:text-4xl mt-3">
@@ -429,7 +428,7 @@ export default function ServicesPage() {
         <div className="mx-auto max-w-4xl px-4 sm:px-6 lg:px-8 space-y-8">
           <div className="faq-header text-center space-y-2">
             <span className="inline-flex max-w-full items-center gap-2 rounded-none border border-slate-200 bg-white px-3 py-1.5 text-[11px] font-semibold uppercase tracking-[0.16em] text-slate-600 shadow-sm sm:px-4 sm:text-xs sm:tracking-[0.3em]">
-              <img src="https://img.icons8.com/ios-glyphs/30/2563eb/help.png" alt="Help Icon" className="h-4 w-4" />
+              <HelpIcon className="h-4 w-4" />
               Patient Resources
             </span>
             <h2 className="text-3xl font-extrabold tracking-tight text-slate-950 sm:text-4xl">
@@ -447,4 +446,3 @@ export default function ServicesPage() {
     </div>
   );
 }
-

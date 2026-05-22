@@ -2,6 +2,7 @@
 
 import React, { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
+import { CloseIcon, SmileIcon, CalendarIcon, UserIcon, PhoneIcon, EmailIcon, ClockIcon, CheckIcon } from "./Icons";
 
 interface BookingModalProps {
   isOpen: boolean;
@@ -95,7 +96,7 @@ export default function BookingModal({ isOpen, onClose, selectedService = "" }: 
             className="absolute right-4 top-4 rounded-none p-2 text-slate-500 transition hover:bg-slate-100 hover:text-slate-900"
             aria-label="Close modal"
           >
-            <img src="https://img.icons8.com/ios-glyphs/30/64748b/multiply.png" className="h-5 w-5" alt="Close" />
+            <CloseIcon className="h-5 w-5" />
           </button>
 
           <div className="px-4 py-7 sm:px-8 sm:py-10">
@@ -103,7 +104,7 @@ export default function BookingModal({ isOpen, onClose, selectedService = "" }: 
               <div className="space-y-6">
                 <div className="space-y-3">
                   <span className="inline-flex items-center gap-2 rounded-none border border-slate-200 bg-slate-50 px-3 py-1 text-[11px] font-semibold uppercase tracking-[0.16em] text-slate-600 sm:text-xs sm:tracking-[0.3em]">
-                    <img src="https://img.icons8.com/ios-glyphs/30/0f172a/smiling.png" className="h-4 w-4" alt="Smile" />
+                    <SmileIcon className="h-4 w-4" />
                     Book a Visit
                   </span>
                   <div>
@@ -130,7 +131,7 @@ export default function BookingModal({ isOpen, onClose, selectedService = "" }: 
                   <label className="space-y-2 text-sm text-slate-700">
                     <span>Select a preferred day</span>
                     <div className="relative">
-                      <img src="https://img.icons8.com/ios-glyphs/30/94a3b8/calendar.png" className="pointer-events-none absolute left-3 top-3.5 h-4 w-4" alt="Calendar" />
+                      <CalendarIcon className="pointer-events-none absolute left-3 top-3.5 h-4 w-4 text-slate-400" />
                       <input
                         type="date"
                         min={new Date().toISOString().split("T")[0]}
@@ -185,7 +186,7 @@ export default function BookingModal({ isOpen, onClose, selectedService = "" }: 
                   <label className="space-y-2 text-sm text-slate-700">
                     <span>Full Name</span>
                     <div className="relative">
-                      <img src="https://img.icons8.com/ios-glyphs/30/94a3b8/user.png" className="pointer-events-none absolute left-3 top-3.5 h-4 w-4" alt="User" />
+                      <UserIcon className="pointer-events-none absolute left-3 top-3.5 h-4 w-4 text-slate-400" />
                       <input
                         type="text"
                         required
@@ -200,7 +201,7 @@ export default function BookingModal({ isOpen, onClose, selectedService = "" }: 
                   <label className="space-y-2 text-sm text-slate-700">
                     <span>Phone Number</span>
                     <div className="relative">
-                      <img src="https://img.icons8.com/ios-glyphs/30/94a3b8/phone.png" className="pointer-events-none absolute left-3 top-3.5 h-4 w-4" alt="Phone" />
+                      <PhoneIcon className="pointer-events-none absolute left-3 top-3.5 h-4 w-4 text-slate-400" />
                       <input
                         type="text"
                         required
@@ -215,7 +216,7 @@ export default function BookingModal({ isOpen, onClose, selectedService = "" }: 
                   <label className="space-y-2 text-sm text-slate-700">
                     <span>Email Address</span>
                     <div className="relative">
-                      <img src="https://img.icons8.com/ios-glyphs/30/94a3b8/new-post.png" className="pointer-events-none absolute left-3 top-3.5 h-4 w-4" alt="Mail" />
+                      <EmailIcon className="pointer-events-none absolute left-3 top-3.5 h-4 w-4 text-slate-400" />
                       <input
                         type="email"
                         required
@@ -241,7 +242,7 @@ export default function BookingModal({ isOpen, onClose, selectedService = "" }: 
 
                 <div className="rounded-none border border-slate-200 bg-slate-50 p-4 text-sm text-slate-700">
                   <div className="flex items-center gap-3">
-                    <img src="https://img.icons8.com/ios-glyphs/30/64748b/clock.png" className="h-4 w-4" alt="Clock" />
+                    <ClockIcon className="h-4 w-4 text-slate-400" />
                     <div>
                       <p className="font-semibold text-slate-900">Selected appointment</p>
                       <p className="mt-1 text-slate-600">{service || "No service selected"} on {date ? new Date(date).toLocaleDateString(undefined, { weekday: "long", year: "numeric", month: "long", day: "numeric" }) : "—"} at {time || "—"}</p>
@@ -262,7 +263,7 @@ export default function BookingModal({ isOpen, onClose, selectedService = "" }: 
             {step === 3 && (
               <div className="space-y-6 text-center">
                 <div className="mx-auto flex h-14 w-14 items-center justify-center rounded-none bg-brand-600 text-white">
-                  <img src="https://img.icons8.com/ios-glyphs/30/ffffff/checkmark.png" className="h-6 w-6" alt="Success" />
+                  <CheckIcon className="h-6 w-6" />
                 </div>
                 <div>
                   <h3 className="text-2xl font-semibold text-slate-950">Request sent</h3>
@@ -284,5 +285,3 @@ export default function BookingModal({ isOpen, onClose, selectedService = "" }: 
     </AnimatePresence>
   );
 }
-
-

@@ -4,6 +4,7 @@ import React, { useEffect, useRef } from "react";
 import Link from "next/link";
 import { gsap } from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
+import { UsersIcon, GraduationIcon, ShieldCheckIcon } from "@/components/Icons";
 
 if (typeof window !== "undefined") {
   gsap.registerPlugin(ScrollTrigger);
@@ -128,7 +129,7 @@ export default function TeamPage() {
         <div className="absolute inset-0 bg-[radial-gradient(#cfe6fe_1px,transparent_1px)] [background-size:24px_24px] opacity-30" />
         <div className="relative mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 text-center space-y-4 team-hero-content">
           <span className="inline-flex max-w-full items-center gap-2 rounded-none border border-slate-200 bg-white px-3 py-1.5 text-[11px] font-semibold uppercase tracking-[0.16em] text-brand-700 shadow-sm sm:px-4 sm:text-xs sm:tracking-[0.3em]">
-            <img src="https://img.icons8.com/ios-glyphs/30/1d4ed8/group.png" alt="Users Icon" className="h-4 w-4" />
+            <UsersIcon className="h-4 w-4" />
             Warm & Caring Team
           </span>
           <h1 className="text-3xl font-extrabold tracking-tight text-slate-950 sm:text-6xl max-w-4xl mx-auto leading-tight">
@@ -177,11 +178,11 @@ export default function TeamPage() {
  
                     <div className="space-y-2 pt-2 border-t border-slate-100 text-xs text-slate-500">
                       <div className="flex items-center gap-2">
-                        <img src="https://img.icons8.com/ios-glyphs/30/94a3b8/graduation-cap.png" alt="Education Icon" className="h-4 w-4 flex-shrink-0" />
+                        <GraduationIcon className="h-4 w-4 flex-shrink-0" />
                         <span className="leading-snug">{member.education}</span>
                       </div>
                       <div className="flex items-center gap-2">
-                        <img src="https://img.icons8.com/ios-glyphs/30/94a3b8/security-checked.png" alt="License Icon" className="h-4 w-4 flex-shrink-0" />
+                        <ShieldCheckIcon className="h-4 w-4 flex-shrink-0" />
                         <span>{member.license}</span>
                       </div>
                     </div>

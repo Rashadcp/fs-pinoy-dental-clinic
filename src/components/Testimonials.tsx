@@ -3,6 +3,7 @@
 import React, { useEffect, useRef } from "react";
 import { gsap } from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
+import { ChatIcon, QuoteIcon, StarIcon } from "./Icons";
 
 if (typeof window !== "undefined") {
   gsap.registerPlugin(ScrollTrigger);
@@ -78,7 +79,7 @@ export default function Testimonials() {
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
         <div className="max-w-3xl text-center mx-auto mb-5 sm:mb-7 testimonials-header">
           <span className="inline-flex max-w-full items-center gap-2 rounded-none border border-slate-200 bg-slate-50 px-3 py-1.5 text-[11px] font-semibold uppercase tracking-[0.16em] text-slate-600 sm:px-4 sm:text-xs sm:tracking-[0.3em]">
-            <img src="https://img.icons8.com/ios-glyphs/30/0f172a/speech-bubble.png" alt="Message Icon" className="h-4 w-4" />
+            <ChatIcon className="h-4 w-4" />
             Patient Stories
           </span>
           <h2 className="mt-2.5 text-3xl font-extrabold tracking-tight text-slate-950 sm:text-5xl">
@@ -89,7 +90,7 @@ export default function Testimonials() {
           </p>
         </div>
       </div>
-      
+
       <div className="mt-6 sm:mt-10 w-full overflow-hidden">
         <div
           ref={marqueeRef}
@@ -102,11 +103,11 @@ export default function Testimonials() {
               className="w-[85vw] max-w-[350px] shrink-0 sm:w-[450px] sm:max-w-none rounded-none border border-slate-200 bg-slate-50 p-5 shadow-sm"
             >
               <div className="flex items-center gap-3 text-slate-950 mb-3">
-                <img src="https://img.icons8.com/ios-glyphs/60/94a3b8/quote-left.png" alt="Quote Icon" className="h-8 w-8 opacity-50" />
+                <QuoteIcon className="h-8 w-8 opacity-50 text-slate-400" />
                 <div>
-                  <div className="flex gap-1">
+                  <div className="flex gap-1 text-yellow-400">
                     {Array.from({ length: review.rating }).map((_, i) => (
-                      <img key={i} src="https://img.icons8.com/ios-glyphs/30/eab308/star.png" alt="Star" className="h-4 w-4" />
+                      <StarIcon key={i} className="h-4 w-4" />
                     ))}
                   </div>
                 </div>

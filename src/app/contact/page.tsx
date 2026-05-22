@@ -3,6 +3,7 @@
 import React, { useState, useEffect, useRef } from "react";
 import { gsap } from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
+import { MarkerIcon, PhoneIcon, EmailIcon, ClockIcon, UserIcon, CheckIcon } from "@/components/Icons";
 
 if (typeof window !== "undefined") {
   gsap.registerPlugin(ScrollTrigger);
@@ -113,7 +114,7 @@ export default function ContactPage() {
             >
               <div className="space-y-4">
                 <div className="flex h-12 w-12 items-center justify-center rounded-none bg-slate-950 text-white group-hover:bg-brand-600 transition-colors duration-300 shadow-sm">
-                  <img src="https://img.icons8.com/ios-glyphs/30/ffffff/marker.png" className="h-5 w-5" alt="Location" />
+                  <MarkerIcon className="h-5 w-5" />
                 </div>
                 <div>
                   <h3 className="text-xs uppercase tracking-[0.14em] text-slate-500 font-bold sm:tracking-[0.25em]">Our Location</h3>
@@ -133,7 +134,7 @@ export default function ContactPage() {
             >
               <div className="space-y-4">
                 <div className="flex h-12 w-12 items-center justify-center rounded-none bg-slate-950 text-white group-hover:bg-brand-600 transition-colors duration-300 shadow-sm">
-                  <img src="https://img.icons8.com/ios-glyphs/30/ffffff/phone.png" className="h-5 w-5" alt="Phone" />
+                  <PhoneIcon className="h-5 w-5" />
                 </div>
                 <div>
                   <h3 className="text-xs uppercase tracking-[0.14em] text-slate-500 font-bold sm:tracking-[0.25em]">Call & WhatsApp</h3>
@@ -153,7 +154,7 @@ export default function ContactPage() {
             >
               <div className="space-y-4">
                 <div className="flex h-12 w-12 items-center justify-center rounded-none bg-slate-950 text-white group-hover:bg-brand-600 transition-colors duration-300 shadow-sm">
-                  <img src="https://img.icons8.com/ios-glyphs/30/ffffff/new-post.png" className="h-5 w-5" alt="Email" />
+                  <EmailIcon className="h-5 w-5" />
                 </div>
                 <div>
                   <h3 className="text-xs uppercase tracking-[0.14em] text-slate-500 font-bold sm:tracking-[0.25em]">Email Support</h3>
@@ -170,7 +171,7 @@ export default function ContactPage() {
             <div className="connect-card group flex flex-col justify-between rounded-none border border-slate-200/80 bg-white/70 p-6 shadow-sm backdrop-blur-md transition-all duration-300">
               <div className="space-y-4">
                 <div className="flex h-12 w-12 items-center justify-center rounded-none bg-slate-950 text-white shadow-sm">
-                  <img src="https://img.icons8.com/ios-glyphs/30/ffffff/clock.png" className="h-5 w-5" alt="Hours" />
+                  <ClockIcon className="h-5 w-5" />
                 </div>
                 <div>
                   <h3 className="text-xs uppercase tracking-[0.14em] text-slate-500 font-bold sm:tracking-[0.25em]">Clinic Hours</h3>
@@ -210,7 +211,7 @@ export default function ContactPage() {
                       <div className="space-y-2">
                         <span className="block text-xs font-bold uppercase tracking-wider text-slate-500">Full Name</span>
                         <div className="relative group flex items-center focus-within:text-brand-500 text-slate-400">
-                          <img src="https://img.icons8.com/ios-glyphs/30/94a3b8/user.png" className="pointer-events-none absolute left-3.5 h-[18px] w-[18px] transition-colors duration-200 opacity-70 group-focus-within:opacity-100" alt="User" />
+                          <UserIcon className="pointer-events-none absolute left-3.5 h-[18px] w-[18px] transition-colors duration-200 opacity-70 group-focus-within:opacity-100" />
                           <input
                             type="text"
                             required
@@ -226,7 +227,7 @@ export default function ContactPage() {
                       <div className="space-y-2">
                         <span className="block text-xs font-bold uppercase tracking-wider text-slate-500">Phone Number</span>
                         <div className="relative group flex items-center focus-within:text-brand-500 text-slate-400">
-                          <img src="https://img.icons8.com/ios-glyphs/30/94a3b8/phone.png" className="pointer-events-none absolute left-3.5 h-[18px] w-[18px] transition-colors duration-200 opacity-70 group-focus-within:opacity-100" alt="Phone" />
+                          <PhoneIcon className="pointer-events-none absolute left-3.5 h-[18px] w-[18px] transition-colors duration-200 opacity-70 group-focus-within:opacity-100" />
                           <input
                             type="text"
                             required
@@ -243,7 +244,7 @@ export default function ContactPage() {
                     <div className="space-y-2">
                       <span className="block text-xs font-bold uppercase tracking-wider text-slate-500">Email Address</span>
                       <div className="relative group flex items-center focus-within:text-brand-500 text-slate-400">
-                        <img src="https://img.icons8.com/ios-glyphs/30/94a3b8/new-post.png" className="pointer-events-none absolute left-3.5 h-[18px] w-[18px] transition-colors duration-200 opacity-70 group-focus-within:opacity-100" alt="Email" />
+                        <EmailIcon className="pointer-events-none absolute left-3.5 h-[18px] w-[18px] transition-colors duration-200 opacity-70 group-focus-within:opacity-100" />
                         <input
                           type="email"
                           required
@@ -304,7 +305,7 @@ export default function ContactPage() {
                     className="py-12 text-center space-y-6 flex-1 flex flex-col justify-center transition-all duration-300 ease-in-out opacity-100"
                   >
                     <div className="mx-auto flex h-16 w-16 items-center justify-center rounded-full bg-emerald-500 text-white shadow-lg animate-bounce">
-                      <img src="https://img.icons8.com/ios-glyphs/30/ffffff/checkmark.png" className="h-7 w-7" alt="Success" />
+                      <CheckIcon className="h-7 w-7" />
                     </div>
                     <div className="space-y-2">
                       <h3 className="text-2xl font-bold text-slate-950">Thank You!</h3>
@@ -371,7 +372,7 @@ export default function ContactPage() {
                 rel="noreferrer"
                 className="inline-flex w-full items-center justify-center gap-2 rounded-none bg-slate-950 px-6 py-4 text-xs font-semibold uppercase tracking-[0.08em] text-white transition-all duration-200 hover:bg-slate-800 shadow-md hover:shadow-lg sm:text-sm sm:tracking-[0.12em]"
               >
-                <img src="https://img.icons8.com/ios-glyphs/30/ffffff/marker.png" className="h-4 w-4" alt="Marker" />
+                <MarkerIcon className="h-4 w-4" />
                 Open Driving Directions
               </a>
             </div>

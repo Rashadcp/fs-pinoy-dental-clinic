@@ -2,8 +2,10 @@
  
 import React, { useEffect, useRef } from "react";
 import Link from "next/link";
+import Image from "next/image";
 import { gsap } from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
+import { ArrowRightIcon } from "./Icons";
 
 if (typeof window !== "undefined") {
   gsap.registerPlugin(ScrollTrigger);
@@ -99,11 +101,13 @@ export default function Team() {
               className="group overflow-hidden rounded-none border border-slate-200 bg-white shadow-sm hover:shadow-md transition-all duration-300 team-card"
             >
               <div className="overflow-hidden border-b border-slate-200 bg-brand-50/65 relative h-72 sm:h-80">
-                <img
+                <Image
                   src={member.image}
                   alt={member.name}
-                  className="h-full w-full object-cover object-top grayscale-[20%] group-hover:grayscale-0 group-hover:scale-105 transition-all duration-500"
+                  fill
+                  className="object-cover object-top grayscale-[20%] group-hover:grayscale-0 group-hover:scale-105 transition-all duration-500"
                   loading="lazy"
+                  sizes="(max-width: 768px) 100vw, 33vw"
                 />
                 <div className="absolute top-4 left-4">
                   <span className={`inline-flex max-w-[calc(100vw-4rem)] rounded-none border px-2.5 py-1 text-[9px] font-bold uppercase tracking-[0.14em] shadow-sm sm:px-3 sm:text-[10px] sm:tracking-[0.25em] ${member.accent}`}>
@@ -125,7 +129,7 @@ export default function Team() {
             className="inline-flex w-full items-center justify-center gap-2 rounded-none bg-slate-900 px-6 py-3.5 text-xs font-semibold uppercase tracking-[0.08em] text-white transition hover:bg-slate-800 shadow-[0_4px_14px_rgba(15,23,42,0.15)] cursor-pointer sm:w-auto sm:px-8 sm:text-sm sm:tracking-[0.12em]"
           >
             Meet Our Certified Specialists
-            <img src="https://img.icons8.com/ios-glyphs/30/ffffff/long-arrow-right.png" className="h-4 w-4" alt="Arrow Right" />
+            <ArrowRightIcon className="h-4 w-4" />
           </Link>
         </div>
       </div>

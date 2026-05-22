@@ -2,8 +2,10 @@
 
 import React, { useEffect, useState } from "react";
 import Link from "next/link";
+import Image from "next/image";
 import { usePathname } from "next/navigation";
 import { motion, AnimatePresence } from "framer-motion";
+import { CloseIcon, MenuIcon } from "./Icons";
 
 interface NavbarProps {
   onOpenBooking: () => void;
@@ -75,7 +77,7 @@ export default function Navbar({ onOpenBooking }: NavbarProps) {
         }`}
       >
         <Link href="/" className="flex items-center gap-3 font-semibold text-slate-900 text-lg tracking-tight">
-          <img src="/fs-pinoy-logo.png" alt="FS Pinoy Dental Clinic" className={`w-auto object-contain transition-all duration-500 ${scrolled ? "h-8" : "h-10"}`} />
+          <Image src="/fs-pinoy-logo.png" alt="FS Pinoy Dental Clinic" width={160} height={40} className={`w-auto object-contain transition-all duration-500 ${scrolled ? "h-8" : "h-10"}`} priority />
         </Link>
 
         <nav className="hidden items-center gap-8 md:flex">
@@ -110,9 +112,9 @@ export default function Navbar({ onOpenBooking }: NavbarProps) {
           aria-label="Toggle navigation menu"
         >
           {isOpen ? (
-            <img src="https://img.icons8.com/ios-glyphs/30/0f172a/multiply.png" className="h-6 w-6" alt="Close" />
+            <CloseIcon className="h-6 w-6" />
           ) : (
-            <img src="https://img.icons8.com/ios-glyphs/30/0f172a/menu.png" className="h-6 w-6" alt="Menu" />
+            <MenuIcon className="h-6 w-6" />
           )}
         </button>
       </div>

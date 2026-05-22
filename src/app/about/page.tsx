@@ -4,6 +4,7 @@ import React, { useEffect, useRef } from "react";
 import Link from "next/link";
 import { gsap } from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
+import { ShieldCheckIcon, SparklesIcon, MedalIcon, PulseIcon } from "@/components/Icons";
 
 if (typeof window !== "undefined") {
   gsap.registerPlugin(ScrollTrigger);
@@ -18,17 +19,17 @@ const stats = [
 
 const pillars = [
   {
-    icon: <img src="https://img.icons8.com/ios-glyphs/60/2563eb/security-checked.png" alt="Licensed Excellence" className="h-6 w-6" />,
+    icon: <ShieldCheckIcon className="h-6 w-6" />,
     title: "Licensed Excellence",
     description: "Our clinicians hold full DHA licensing, continuously training to offer predictable, high-precision outcomes."
   },
   {
-    icon: <img src="https://img.icons8.com/ios-glyphs/60/2563eb/sparkles.png" alt="Comfort-First Protocols" className="h-6 w-6" />,
+    icon: <SparklesIcon className="h-6 w-6" />,
     title: "Comfort-First Protocols",
     description: "We use modern, minimally-invasive dental techniques and soothing care protocols to ensure an entirely stress-free visit."
   },
   {
-    icon: <img src="https://img.icons8.com/ios-glyphs/60/2563eb/trust.png" alt="Honest Communication" className="h-6 w-6" />,
+    icon: <ShieldCheckIcon className="h-6 w-6" />,
     title: "Honest & Clear Communication",
     description: "No medical jargon, no hidden fees. We explain every treatment option in plain language with transparent pricing."
   }
@@ -158,7 +159,7 @@ export default function AboutPage() {
         <div className="relative mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 text-center">
           <div className="space-y-4 about-hero-content">
             <span className="inline-flex max-w-full items-center gap-2 rounded-none border border-slate-200 bg-white px-3 py-1.5 text-[11px] font-semibold uppercase tracking-[0.16em] text-brand-700 shadow-sm sm:px-4 sm:text-xs sm:tracking-[0.3em]">
-              <img src="https://img.icons8.com/ios-glyphs/30/1d4ed8/medal.png" alt="Award Icon" className="h-4 w-4" />
+              <MedalIcon className="h-4 w-4" />
               Established Care Excellence
             </span>
             <h1 className="text-3xl font-extrabold tracking-tight text-slate-950 sm:text-6xl max-w-4xl mx-auto leading-tight">
@@ -242,7 +243,7 @@ export default function AboutPage() {
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
           <div className="text-center max-w-3xl mx-auto mb-12 pillars-header">
             <span className="inline-flex max-w-full items-center gap-2 rounded-none border border-slate-200 bg-white px-3 py-1.5 text-[11px] font-semibold uppercase tracking-[0.16em] text-slate-600 shadow-sm sm:px-4 sm:text-xs sm:tracking-[0.3em]">
-              <img src="https://img.icons8.com/ios-glyphs/30/2563eb/pulse.png" alt="Activity Icon" className="h-4 w-4" />
+              <PulseIcon className="h-4 w-4" />
               Core Pillars
             </span>
             <h2 className="text-3xl font-extrabold tracking-tight text-slate-950 sm:text-4xl mt-3">

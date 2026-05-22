@@ -4,11 +4,12 @@ import React, { useEffect, useRef } from "react";
 import { gsap } from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import Link from "next/link";
+import { PulseIcon, CheckIcon, ArrowRightIcon } from "./Icons";
 
 if (typeof window !== "undefined") {
   gsap.registerPlugin(ScrollTrigger);
 }
- 
+
 interface ServiceItem {
   id: string;
   title: string;
@@ -19,7 +20,7 @@ interface ServiceItem {
   badge: string;
   accent: string;
 }
- 
+
 const SERVICES: ServiceItem[] = [
   {
     id: "preventive",
@@ -129,11 +130,11 @@ const SERVICES: ServiceItem[] = [
     accent: "bg-amber-50 text-amber-700 border-amber-100"
   }
 ];
- 
+
 interface ServicesProps {
   onOpenBookingWithService: (serviceName: string) => void;
 }
- 
+
 export default function Services({ onOpenBookingWithService }: ServicesProps) {
   const containerRef = useRef<HTMLDivElement>(null);
 
@@ -176,7 +177,7 @@ export default function Services({ onOpenBookingWithService }: ServicesProps) {
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
         <div className="max-w-3xl space-y-2.5 text-center mx-auto mb-10 services-header">
           <span className="inline-flex max-w-full items-center gap-2 rounded-none border border-slate-200 bg-white px-3 py-1.5 text-[11px] font-semibold uppercase tracking-[0.16em] text-slate-600 sm:px-4 sm:text-xs sm:tracking-[0.3em]">
-            <img src="https://img.icons8.com/ios-glyphs/30/0f172a/pulse.png" alt="Heartbeat Icon" className="h-4 w-4" />
+            <PulseIcon className="h-4 w-4" />
             Our Services
           </span>
           <h2 className="text-3xl font-extrabold tracking-tight text-slate-900 sm:text-5xl">
@@ -186,7 +187,7 @@ export default function Services({ onOpenBookingWithService }: ServicesProps) {
             Each service is designed to be straightforward, efficient, and with your comfort in mind. We explain the plan first, then deliver the treatment.
           </p>
         </div>
- 
+
         <div className="grid gap-6 md:grid-cols-3">
           {SERVICES.slice(0, 3).map((service) => (
             <div
@@ -207,7 +208,7 @@ export default function Services({ onOpenBookingWithService }: ServicesProps) {
                     </span>
                   </div>
                 </div>
- 
+
                 <div className="p-6 space-y-4">
                   <h3 className="text-xl font-extrabold tracking-tight text-slate-950 min-h-[56px] flex items-center">
                     {service.title}
@@ -218,12 +219,12 @@ export default function Services({ onOpenBookingWithService }: ServicesProps) {
                   <p className="text-sm leading-relaxed text-slate-600 line-clamp-3">
                     {service.description}
                   </p>
- 
+
                   <div className="space-y-2 pt-2 border-t border-slate-100">
                     {service.benefits.slice(0, 3).map((item) => (
                       <div key={item} className="flex items-start gap-2.5 text-xs text-slate-600">
                         <span className="mt-0.5 h-4 w-4 flex-none rounded-none bg-slate-100 text-slate-900 grid place-items-center">
-                          <img src="https://img.icons8.com/ios-glyphs/30/0f172a/checkmark.png" alt="Checkmark" className="h-3 w-3" />
+                          <CheckIcon className="h-3 w-3" />
                         </span>
                         <span className="line-clamp-1">{item}</span>
                       </div>
@@ -231,32 +232,30 @@ export default function Services({ onOpenBookingWithService }: ServicesProps) {
                   </div>
                 </div>
               </div>
- 
+
               <div className="p-6 pt-0">
                 <button
                   onClick={() => onOpenBookingWithService(service.title)}
                   className="group inline-flex w-full items-center justify-center gap-2 border border-slate-200 py-2.5 text-xs font-bold uppercase tracking-wider text-brand-600 hover:bg-brand-50 hover:border-brand-200 transition duration-200 cursor-pointer"
                 >
                   Inquire about this service
-                  <img src="https://img.icons8.com/ios-glyphs/30/2563eb/long-arrow-right.png" alt="Arrow Right" className="h-3.5 w-3.5 transition-transform group-hover:translate-x-1" />
+                  <ArrowRightIcon className="h-3.5 w-3.5 transition-transform group-hover:translate-x-1" />
                 </button>
               </div>
             </div>
           ))}
         </div>
- 
+
         <div className="mt-12 text-center services-cta">
           <Link
             href="/services"
             className="inline-flex w-full items-center justify-center gap-2 rounded-none bg-slate-900 px-6 py-3.5 text-xs font-semibold uppercase tracking-[0.08em] text-white transition hover:bg-slate-800 shadow-[0_4px_14px_rgba(15,23,42,0.15)] cursor-pointer sm:w-auto sm:px-8 sm:text-sm sm:tracking-[0.12em]"
           >
             Explore All 7 Specialized Services
-            <img src="https://img.icons8.com/ios-glyphs/30/ffffff/long-arrow-right.png" alt="Arrow Right" className="h-4 w-4" />
+            <ArrowRightIcon className="h-4 w-4" />
           </Link>
         </div>
       </div>
     </section>
   );
 }
-
-
