@@ -1,36 +1,67 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# FS Pinoy Dental Clinic Website
 
-## Getting Started
+A static marketing site for FS Pinoy Dental Clinic built with Next.js and Tailwind CSS.
 
-First, run the development server:
+## Overview
+
+This project is designed to showcase the clinic's services, team, contact details, and location. It includes:
+
+- Landing page with hero section and featured services
+- About, Services, Team, and Contact pages
+- Google Maps embed for clinic location
+- Static contact links using `mailto:` and WhatsApp
+- Modern responsive design with animations powered by GSAP
+
+## Tech Stack
+
+- Next.js 16
+- React 19
+- TypeScript
+- Tailwind CSS
+- GSAP for scroll animations
+- Lucide React for icons
+
+## Available Scripts
+
+From the project root, run:
 
 ```bash
+npm install
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Then open [http://localhost:3000](http://localhost:3000).
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+Other useful commands:
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+```bash
+npm run build
+npm run start
+npm run lint
+```
 
-## Learn More
+## Project Structure
 
-To learn more about Next.js, take a look at the following resources:
+- `src/app/` — Next.js App Router pages and layout
+- `src/components/` — reusable UI components
+- `public/` — static assets
+- `tailwind.config.cjs` — Tailwind CSS config
+- `package.json` — dependencies and scripts
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+## Contact Page Note
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+Since this is a static site, the contact page uses direct links instead of a backend form:
 
-## Deploy on Vercel
+- `mailto:hello@fspinoydental.com`
+- `tel:+971542575730`
+- WhatsApp chat link
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+If you want a working form later, you can integrate a static form service like Formspree, Netlify Forms, or a custom API.
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+## Deployment
+
+This site can be deployed on any static hosting platform that supports Next.js, such as Vercel, Netlify, or AWS Amplify.
+
+## License
+
+This repository is private. Please update license and project details as needed.
