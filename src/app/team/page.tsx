@@ -1,14 +1,8 @@
 "use client";
 
-import React, { useEffect, useRef } from "react";
+import React from "react";
 import Link from "next/link";
-import { gsap } from "gsap";
-import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { UsersIcon, GraduationIcon, ShieldCheckIcon } from "@/components/Icons";
-
-if (typeof window !== "undefined") {
-  gsap.registerPlugin(ScrollTrigger);
-}
 
 interface Member {
   name: string;
@@ -55,77 +49,10 @@ const TEAM_MEMBERS: Member[] = [
 ];
 
 export default function TeamPage() {
-  const containerRef = useRef<HTMLDivElement>(null);
-
-  useEffect(() => {
-    const ctx = gsap.context(() => {
-      // 1. Hero Content Reveal
-      gsap.from(".team-hero-content > *", {
-        opacity: 0,
-        y: 40,
-        duration: 0.8,
-        stagger: 0.15,
-        ease: "power3.out"
-      });
-
-      // 2. Team Cards Stagger Reveal
-      gsap.from(".team-member-card", {
-        scrollTrigger: {
-          trigger: ".team-cards-grid",
-          start: "top 80%"
-        },
-        y: 40,
-        duration: 0.7,
-        stagger: 0.2,
-        ease: "power2.out"
-      });
-
-      // 3. Clinical Integrity - Text Elements
-      gsap.from(".integrity-text > *", {
-        scrollTrigger: {
-          trigger: ".integrity-section",
-          start: "top 80%"
-        },
-        opacity: 0,
-        x: -30,
-        duration: 0.7,
-        stagger: 0.15,
-        ease: "power2.out"
-      });
-
-      // 4. Clinical Integrity - Image
-      gsap.from(".integrity-image", {
-        scrollTrigger: {
-          trigger: ".integrity-section",
-          start: "top 80%"
-        },
-        opacity: 0,
-        x: 30,
-        duration: 0.8,
-        ease: "power2.out"
-      });
-
-      // 5. Scheduler Banner
-      gsap.from(".scheduler-banner > *", {
-        scrollTrigger: {
-          trigger: ".scheduler-banner",
-          start: "top 85%"
-        },
-        opacity: 0,
-        y: 30,
-        duration: 0.7,
-        stagger: 0.15,
-        ease: "power2.out"
-      });
-    }, containerRef);
-
-    return () => ctx.revert();
-  }, []);
-
   return (
-    <div ref={containerRef} className="flex-1 bg-white text-slate-900 overflow-hidden">
+    <div className="flex-1 bg-white text-slate-900 overflow-hidden">
       {/* Team Hero Section */}
-      <section className="relative overflow-hidden bg-slate-50 pt-24 pb-12 sm:pt-32 sm:pb-20 border-b border-slate-200">
+      <section className="relative overflow-hidden bg-slate-50 pt-32 pb-12 sm:pt-40 sm:pb-20 border-b border-slate-200">
         <div className="absolute inset-0 bg-[radial-gradient(#cfe6fe_1px,transparent_1px)] [background-size:24px_24px] opacity-30" />
         <div className="relative mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 text-center space-y-4 team-hero-content">
           <span className="inline-flex max-w-full items-center gap-2 rounded-none border border-slate-200 bg-white px-3 py-1.5 text-[11px] font-semibold uppercase tracking-[0.16em] text-brand-700 shadow-sm sm:px-4 sm:text-xs sm:tracking-[0.3em]">
@@ -175,7 +102,7 @@ export default function TeamPage() {
                     <p className="text-sm leading-relaxed text-slate-600 font-medium">
                       {member.focus}
                     </p>
- 
+
                     <div className="space-y-2 pt-2 border-t border-slate-100 text-xs text-slate-500">
                       <div className="flex items-center gap-2">
                         <GraduationIcon className="h-4 w-4 flex-shrink-0" />

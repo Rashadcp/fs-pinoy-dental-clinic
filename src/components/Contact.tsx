@@ -1,55 +1,23 @@
 "use client";
 
-import React, { useEffect, useRef } from "react";
-import { gsap } from "gsap";
-import { ScrollTrigger } from "gsap/ScrollTrigger";
+import React from "react";
+import { motion } from "framer-motion";
 import WhatsAppPopup from "./WhatsAppPopup";
 import { ShieldCheckIcon, MarkerIcon, PhoneIcon, EmailIcon, ClockIcon } from "./Icons";
 
-if (typeof window !== "undefined") {
-  gsap.registerPlugin(ScrollTrigger);
-}
-
 export default function Contact() {
-  const containerRef = useRef<HTMLDivElement>(null);
-
-  useEffect(() => {
-    const ctx = gsap.context(() => {
-      // Left side details fade + slide
-      gsap.from(".contact-left", {
-        opacity: 0,
-        x: -40,
-        duration: 0.8,
-        ease: "power2.out",
-        scrollTrigger: {
-          trigger: containerRef.current,
-          start: "top 80%",
-          toggleActions: "play none none none"
-        }
-      });
-
-      // Right side map box fade + slide
-      gsap.from(".contact-right", {
-        opacity: 0,
-        x: 40,
-        duration: 0.8,
-        ease: "power2.out",
-        scrollTrigger: {
-          trigger: containerRef.current,
-          start: "top 80%",
-          toggleActions: "play none none none"
-        }
-      });
-    }, containerRef);
-
-    return () => ctx.revert();
-  }, []);
-
   return (
-    <section ref={containerRef} id="contact" className="bg-slate-50 py-12 sm:py-14 md:py-18 border-t border-slate-200">
+    <section id="contact" className="bg-slate-50 py-20 sm:py-24 lg:py-28 border-t border-slate-200">
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
         <div className="grid gap-6 sm:gap-10 lg:grid-cols-2 lg:items-start">
-          <div className="space-y-6 contact-left">
+          
+          <motion.div
+            initial={{ opacity: 0, x: -40 }}
+            whileInView={{ opacity: 1, x: 0 }}
+            viewport={{ once: true, margin: "-100px" }}
+            transition={{ duration: 0.7, ease: "easeOut" }}
+            className="space-y-6 contact-left"
+          >
             <div className="inline-flex items-center gap-3 text-xs font-semibold uppercase tracking-[0.16em] text-slate-500 sm:text-sm sm:tracking-[0.3em]">
               <ShieldCheckIcon className="h-4 w-4" />
               Find Our Clinic
@@ -66,7 +34,7 @@ export default function Contact() {
             <div className="grid gap-3 sm:gap-3.5">
               <div className="rounded-none border border-slate-200 bg-white p-4 sm:p-5">
                 <div className="flex items-start gap-3 text-slate-950 mb-2 sm:gap-4">
-                  <div className="flex h-11 w-11 items-center justify-center rounded-none bg-slate-900 text-white">
+                  <div className="flex h-11 w-11 flex-shrink-0 self-start items-center justify-center rounded-none bg-slate-900 text-white">
                     <MarkerIcon className="h-5 w-5" />
                   </div>
                   <div className="min-w-0">
@@ -79,7 +47,7 @@ export default function Contact() {
 
               <div className="rounded-none border border-slate-200 bg-white p-4 sm:p-5">
                 <div className="flex items-start gap-3 text-slate-950 mb-2 sm:gap-4">
-                  <div className="flex h-11 w-11 items-center justify-center rounded-none bg-slate-900 text-white">
+                  <div className="flex h-11 w-11 flex-shrink-0 self-start items-center justify-center rounded-none bg-slate-900 text-white">
                     <PhoneIcon className="h-5 w-5" />
                   </div>
                   <div className="min-w-0">
@@ -92,7 +60,7 @@ export default function Contact() {
 
               <div className="rounded-none border border-slate-200 bg-white p-4 sm:p-5">
                 <div className="flex items-start gap-3 text-slate-950 mb-2 sm:gap-4">
-                  <div className="flex h-11 w-11 items-center justify-center rounded-none bg-slate-900 text-white">
+                  <div className="flex h-11 w-11 flex-shrink-0 self-start items-center justify-center rounded-none bg-slate-900 text-white">
                     <EmailIcon className="h-5 w-5" />
                   </div>
                   <div className="min-w-0">
@@ -104,20 +72,26 @@ export default function Contact() {
 
               <div className="rounded-none border border-slate-200 bg-white p-4 sm:p-5">
                 <div className="flex items-start gap-3 text-slate-950 mb-2 sm:gap-4">
-                  <div className="flex h-11 w-11 items-center justify-center rounded-none bg-slate-900 text-white">
+                  <div className="flex h-11 w-11 flex-shrink-0 self-start items-center justify-center rounded-none bg-slate-900 text-white">
                     <ClockIcon className="h-5 w-5" />
                   </div>
                   <div className="min-w-0">
                     <p className="text-xs uppercase tracking-[0.3em] text-slate-500">Hours</p>
-                    <p className="mt-1.5 text-sm font-semibold text-slate-900">Monday to Saturday: 9:00 AM – 5:00 PM</p>
+                    <p className="mt-1.5 text-sm font-semibold text-slate-900">Monday to Saturday: 9:00 AM – 6:00 PM</p>
                   </div>
                 </div>
                 <p className="text-sm text-slate-500">Appointment scheduling is recommended to ensure a timely visit.</p>
               </div>
             </div>
-          </div>
+          </motion.div>
 
-          <div className="rounded-none border border-slate-200 bg-white p-4 sm:p-5 shadow-sm contact-right">
+          <motion.div
+            initial={{ opacity: 0, x: 40 }}
+            whileInView={{ opacity: 1, x: 0 }}
+            viewport={{ once: true, margin: "-100px" }}
+            transition={{ duration: 0.7, ease: "easeOut" }}
+            className="rounded-none border border-slate-200 bg-white p-4 sm:p-5 shadow-sm contact-right"
+          >
             <div className="mb-4 rounded-none border border-slate-200 bg-slate-950 px-4 py-4 text-center text-white">
               <p className="text-xs uppercase tracking-[0.3em]">Clinic Map</p>
               <p className="mt-1.5 text-lg font-semibold">Al Satwa, Dubai</p>
@@ -139,7 +113,7 @@ export default function Contact() {
             >
               Open in Maps
             </a>
-          </div>
+          </motion.div>
         </div>
       </div>
       <WhatsAppPopup />

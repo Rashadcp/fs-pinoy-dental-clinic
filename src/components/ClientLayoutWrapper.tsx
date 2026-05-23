@@ -1,29 +1,18 @@
 "use client";
 
-import React, { useState, useEffect, Suspense } from "react";
+import React, { Suspense } from "react";
 import { useSearchParams, useRouter, usePathname } from "next/navigation";
 import Navbar from "./Navbar";
 import Footer from "./Footer";
 import BookingModal from "./BookingModal";
 
 function BookingModalHandler({ children }: { children: React.ReactNode }) {
-  const [isBookingOpen, setIsBookingOpen] = useState(false);
-  const [selectedService, setSelectedService] = useState("");
   const searchParams = useSearchParams();
   const router = useRouter();
   const pathname = usePathname();
 
-  useEffect(() => {
-    const booking = searchParams.get("booking");
-    const service = searchParams.get("service");
-
-    if (booking === "open") {
-      setSelectedService(service || "");
-      setIsBookingOpen(true);
-    } else {
-      setIsBookingOpen(false);
-    }
-  }, [searchParams]);
+  const isBookingOpen = searchParams.get("booking") === "open";
+  const selectedService = searchParams.get("service") || "";
 
   const handleOpenBooking = () => {
     const params = new URLSearchParams(searchParams.toString());
@@ -37,7 +26,6 @@ function BookingModalHandler({ children }: { children: React.ReactNode }) {
     params.delete("service");
     const newQuery = params.toString();
     router.push(`${pathname}${newQuery ? `?${newQuery}` : ""}`, { scroll: false });
-    setIsBookingOpen(false);
   };
 
   return (

@@ -1,14 +1,8 @@
 "use client";
 
-import React, { useEffect, useRef } from "react";
+import React from "react";
 import Link from "next/link";
-import { gsap } from "gsap";
-import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { ShieldCheckIcon, SparklesIcon, MedalIcon, PulseIcon } from "@/components/Icons";
-
-if (typeof window !== "undefined") {
-  gsap.registerPlugin(ScrollTrigger);
-}
 
 const stats = [
   { value: "12+", label: "Years of Dental Care" },
@@ -36,125 +30,10 @@ const pillars = [
 ];
 
 export default function AboutPage() {
-  const containerRef = useRef<HTMLDivElement>(null);
-
-  const parseStat = (value: string) => {
-    const match = value.match(/^[0-9.,]+/);
-    if (!match) return { target: 0, suffix: value, isFloat: false };
-    const numStr = match[0];
-    const suffix = value.substring(numStr.length);
-    const target = parseFloat(numStr.replace(/,/g, ""));
-    const isFloat = numStr.includes(".");
-    return { target, suffix, isFloat };
-  };
-
-  useEffect(() => {
-    const ctx = gsap.context(() => {
-      // 1. Hero fade-up onload
-      gsap.from(".about-hero-content", {
-        opacity: 0,
-        y: 40,
-        duration: 0.8,
-        ease: "power3.out"
-      });
-
-      // 2. Narrative section reveals
-      gsap.from(".about-narrative-visual", {
-        opacity: 0,
-        x: -40,
-        duration: 0.85,
-        ease: "power2.out",
-        scrollTrigger: {
-          trigger: ".about-narrative-section",
-          start: "top 80%",
-          toggleActions: "play none none none"
-        }
-      });
-
-      gsap.from(".about-narrative-content", {
-        opacity: 0,
-        x: 40,
-        duration: 0.85,
-        ease: "power2.out",
-        scrollTrigger: {
-          trigger: ".about-narrative-section",
-          start: "top 80%",
-          toggleActions: "play none none none"
-        }
-      });
-
-      // 3. Stats numbers count-up tween
-      const statNumbers = gsap.utils.toArray<HTMLElement>(".stat-number");
-      statNumbers.forEach((el) => {
-        const targetVal = parseFloat(el.getAttribute("data-target") || "0");
-        const isFloat = el.getAttribute("data-float") === "true";
-        const suffix = el.getAttribute("data-suffix") || "";
-        
-        const countObj = { val: 0 };
-        
-        gsap.to(countObj, {
-          val: targetVal,
-          duration: 2.2,
-          ease: "power2.out",
-          scrollTrigger: {
-            trigger: el,
-            start: "top 85%",
-            toggleActions: "play none none none"
-          },
-          onUpdate: () => {
-            if (isFloat) {
-              el.innerText = countObj.val.toFixed(1) + suffix;
-            } else {
-              el.innerText = Math.round(countObj.val).toLocaleString() + suffix;
-            }
-          }
-        });
-      });
-
-      // 4. Pillars section reveals
-      const pillarsTl = gsap.timeline({
-        scrollTrigger: {
-          trigger: ".pillars-section",
-          start: "top 80%",
-          toggleActions: "play none none none"
-        }
-      });
-
-      pillarsTl.from(".pillars-header", {
-        opacity: 0,
-        y: 30,
-        duration: 0.7,
-        ease: "power2.out"
-      })
-      .from(".pillar-card", {
-        y: 40,
-        duration: 0.8,
-        stagger: 0.15,
-        ease: "power2.out"
-      }, "-=0.4");
-
-      // 5. Standards section reveal
-      gsap.from(".standards-content", {
-        opacity: 0,
-        y: 35,
-        duration: 0.8,
-        ease: "power2.out",
-        scrollTrigger: {
-          trigger: ".standards-section",
-          start: "top 80%",
-          toggleActions: "play none none none"
-        }
-      });
-
-    }, containerRef);
-
-    return () => ctx.revert();
-  }, []);
-
   return (
-    <div ref={containerRef} className="flex-1 bg-white text-slate-900">
+    <div className="flex-1 bg-white text-slate-900">
       {/* Premium Hero Section */}
-      <section className="relative overflow-hidden bg-slate-50 pt-24 pb-12 sm:pt-32 sm:pb-20 border-b border-slate-200">
+      <section className="relative overflow-hidden bg-slate-50 pt-32 pb-12 sm:pt-40 sm:pb-20 border-b border-slate-200">
         <div className="absolute inset-0 bg-[radial-gradient(#cfe6fe_1px,transparent_1px)] [background-size:24px_24px] opacity-30" />
         <div className="relative mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 text-center">
           <div className="space-y-4 about-hero-content">
@@ -214,24 +93,14 @@ export default function AboutPage() {
 
               {/* Stats Box */}
               <div className="grid grid-cols-2 sm:grid-cols-4 gap-4 pt-4 border-t border-slate-200">
-                {stats.map((stat) => {
-                  const { target, suffix, isFloat } = parseStat(stat.value);
-                  return (
-                    <div key={stat.label} className="bg-slate-900 text-white p-4 border border-slate-800 shadow-sm flex flex-col justify-between">
-                      <p className="text-2xl sm:text-3xl font-black text-brand-400">
-                        <span
-                          className="stat-number"
-                          data-target={target}
-                          data-suffix={suffix}
-                          data-float={isFloat}
-                        >
-                          0{suffix}
-                        </span>
-                      </p>
-                      <p className="text-xs text-slate-300 mt-1 uppercase font-semibold tracking-wider leading-tight">{stat.label}</p>
-                    </div>
-                  );
-                })}
+                {stats.map((stat) => (
+                  <div key={stat.label} className="bg-slate-900 text-white p-4 border border-slate-800 shadow-sm flex flex-col justify-between">
+                    <p className="text-2xl sm:text-3xl font-black text-brand-400">
+                      <span>{stat.value}</span>
+                    </p>
+                    <p className="text-xs text-slate-300 mt-1 uppercase font-semibold tracking-wider leading-tight">{stat.label}</p>
+                  </div>
+                ))}
               </div>
             </div>
           </div>

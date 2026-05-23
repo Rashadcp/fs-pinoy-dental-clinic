@@ -1,13 +1,8 @@
 "use client";
 
-import React, { useEffect, useRef } from "react";
+import React from "react";
 import Link from "next/link";
-import { gsap } from "gsap";
-import { ScrollTrigger } from "gsap/ScrollTrigger";
-
-if (typeof window !== "undefined") {
-  gsap.registerPlugin(ScrollTrigger);
-}
+import { motion } from "framer-motion";
 
 const stats = [
   { value: "12+", label: "Years of dental care" },
@@ -16,82 +11,18 @@ const stats = [
 ];
 
 export default function About() {
-  const containerRef = useRef<HTMLDivElement>(null);
-
-  const parseStat = (value: string) => {
-    const match = value.match(/^[0-9.,]+/);
-    if (!match) return { target: 0, suffix: value, isFloat: false };
-    const numStr = match[0];
-    const suffix = value.substring(numStr.length);
-    const target = parseFloat(numStr.replace(/,/g, ""));
-    const isFloat = numStr.includes(".");
-    return { target, suffix, isFloat };
-  };
-
-  useEffect(() => {
-    const ctx = gsap.context(() => {
-      // Columns entrance reveals
-      gsap.from(".about-left", {
-        opacity: 0,
-        x: -40,
-        duration: 0.8,
-        ease: "power2.out",
-        scrollTrigger: {
-          trigger: containerRef.current,
-          start: "top 80%",
-          toggleActions: "play none none none"
-        }
-      });
-
-      gsap.from(".about-right", {
-        opacity: 0,
-        x: 40,
-        duration: 0.8,
-        ease: "power2.out",
-        scrollTrigger: {
-          trigger: containerRef.current,
-          start: "top 80%",
-          toggleActions: "play none none none"
-        }
-      });
-
-      // Stats numbers count-up tween
-      const statNumbers = gsap.utils.toArray(".stat-number");
-      statNumbers.forEach((el: any) => {
-        const targetVal = parseFloat(el.getAttribute("data-target"));
-        const isFloat = el.getAttribute("data-float") === "true";
-        const suffix = el.getAttribute("data-suffix") || "";
-        
-        const countObj = { val: 0 };
-        
-        gsap.to(countObj, {
-          val: targetVal,
-          duration: 2,
-          ease: "power2.out",
-          scrollTrigger: {
-            trigger: el,
-            start: "top 85%",
-            toggleActions: "play none none none"
-          },
-          onUpdate: () => {
-            if (isFloat) {
-              el.innerText = countObj.val.toFixed(1) + suffix;
-            } else {
-              el.innerText = Math.round(countObj.val).toLocaleString() + suffix;
-            }
-          }
-        });
-      });
-    }, containerRef);
-
-    return () => ctx.revert();
-  }, []);
-
   return (
-    <section ref={containerRef} id="about" className="bg-slate-50 py-12 sm:py-14 md:py-18 border-t border-slate-200">
+    <section id="about" className="bg-slate-50 py-20 sm:py-24 lg:py-28 border-t border-slate-200">
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
         <div className="grid gap-6 sm:gap-10 lg:grid-cols-[0.95fr_1.05fr] lg:items-center">
-          <div className="space-y-4 sm:space-y-6 about-left">
+          
+          <motion.div
+            initial={{ opacity: 0, x: -40 }}
+            whileInView={{ opacity: 1, x: 0 }}
+            viewport={{ once: true, margin: "-100px" }}
+            transition={{ duration: 0.7, ease: "easeOut" }}
+            className="space-y-4 sm:space-y-6 about-left"
+          >
             <div className="inline-flex items-center gap-3 text-xs font-semibold uppercase tracking-[0.16em] text-brand-700 sm:text-sm sm:tracking-[0.3em]">
               <span className="inline-flex h-9 w-9 items-center justify-center rounded-none bg-brand-100 text-brand-700">A</span>
               About FS Pinoy
@@ -106,24 +37,21 @@ export default function About() {
             </div>
 
             <div className="grid grid-cols-3 gap-2 sm:gap-4">
-              {stats.map((stat) => {
-                const { target, suffix, isFloat } = parseStat(stat.value);
-                return (
-                  <div key={stat.label} className="rounded-none border border-slate-200 bg-slate-900 p-2.5 sm:p-4 text-white shadow-sm flex flex-col justify-between">
-                    <p className="text-xl sm:text-3xl font-extrabold tracking-tight">
-                      <span
-                        className="stat-number"
-                        data-target={target}
-                        data-suffix={suffix}
-                        data-float={isFloat}
-                      >
-                        0{suffix}
-                      </span>
-                    </p>
-                    <p className="mt-1 text-[10px] sm:text-xs md:text-sm leading-tight text-slate-300">{stat.label}</p>
-                  </div>
-                );
-              })}
+              {stats.map((stat, idx) => (
+                <motion.div
+                  key={stat.label}
+                  initial={{ opacity: 0, scale: 0.95, y: 15 }}
+                  whileInView={{ opacity: 1, scale: 1, y: 0 }}
+                  viewport={{ once: true }}
+                  transition={{ duration: 0.5, delay: idx * 0.1, ease: "easeOut" }}
+                  className="rounded-none border border-slate-200 bg-slate-900 p-2.5 sm:p-4 text-white shadow-sm flex flex-col justify-between"
+                >
+                  <p className="text-xl sm:text-3xl font-extrabold tracking-tight">
+                    <span>{stat.value}</span>
+                  </p>
+                  <p className="mt-1 text-[10px] sm:text-xs md:text-sm leading-tight text-slate-300">{stat.label}</p>
+                </motion.div>
+              ))}
             </div>
  
             <div className="pt-6">
@@ -135,9 +63,15 @@ export default function About() {
                 <span className="text-brand-400">&rarr;</span>
               </Link>
             </div>
-          </div>
+          </motion.div>
 
-          <div className="relative overflow-hidden rounded-none border border-slate-200 bg-slate-950 shadow-sm about-right">
+          <motion.div
+            initial={{ opacity: 0, x: 40 }}
+            whileInView={{ opacity: 1, x: 0 }}
+            viewport={{ once: true, margin: "-100px" }}
+            transition={{ duration: 0.7, ease: "easeOut" }}
+            className="relative overflow-hidden rounded-none border border-slate-200 bg-slate-950 shadow-sm about-right"
+          >
             <img
               src="https://images.unsplash.com/photo-1609840114035-3c981b782dfe?auto=format&fit=crop&q=80&w=1200"
               alt="Modern dental clinic equipment and treatment room"
@@ -151,11 +85,9 @@ export default function About() {
                 <p className="mt-2 text-sm leading-relaxed text-slate-200">From initial consultation to follow-up, our clinic focuses on thoughtful treatment and a welcoming experience.</p>
               </div>
             </div>
-          </div>
+          </motion.div>
         </div>
       </div>
     </section>
   );
 }
-
-

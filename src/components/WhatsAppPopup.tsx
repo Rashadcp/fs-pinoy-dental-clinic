@@ -27,10 +27,10 @@ export default function WhatsAppPopup() {
       {/* WhatsApp Floating Button */}
       <button
         onClick={() => setIsOpen(true)}
-        className="group fixed bottom-6 right-6 z-40 flex h-16 w-16 items-center justify-center rounded-full bg-green-500 text-white shadow-lg hover:bg-green-600 transition-all duration-300 hover:scale-110 hover:shadow-xl sm:h-14 sm:w-14"
+        className="group fixed bottom-8 right-6 z-40 flex h-16 w-16 items-center justify-center rounded-full bg-green-500 text-white shadow-[0_12px_36px_rgba(0,0,0,0.22)] border-2 border-white/25 hover:bg-green-600 transition-all duration-300 hover:scale-110 hover:shadow-[0_16px_44px_rgba(0,0,0,0.32)] sm:h-14 sm:w-14 cursor-pointer"
         aria-label="Open WhatsApp chat"
       >
-        <WhatsAppIcon className="h-8 w-8 sm:h-7 sm:w-7" />
+        <WhatsAppIcon className="h-8 w-8 sm:h-7 sm:w-7 relative z-10" />
       </button>
 
       {/* WhatsApp Popup Modal */}

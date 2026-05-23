@@ -1,14 +1,8 @@
 "use client";
 
-import React, { useState, useEffect, useRef } from "react";
+import React, { useState } from "react";
 import Link from "next/link";
-import { gsap } from "gsap";
-import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { PulseIcon, CalendarIcon, HelpIcon, ChevronDownIcon } from "@/components/Icons";
-
-if (typeof window !== "undefined") {
-  gsap.registerPlugin(ScrollTrigger);
-}
 
 interface ServiceItem {
   id: string;
@@ -178,9 +172,79 @@ function FAQItem({ question, answer }: { question: string; answer: string }) {
   );
 }
 
+const getBenefitIcon = (item: string, serviceId: string) => {
+  const normalized = item.toLowerCase();
+  
+  if (normalized.includes("checkup") || normalized.includes("screening")) {
+    return (
+      <svg className="h-4.5 w-4.5 text-teal-600 shrink-0" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
+        <circle cx="11" cy="11" r="8" />
+        <line x1="21" y1="21" x2="16.65" y2="16.65" />
+        <path d="M11 8a3 3 0 0 1 3 3" />
+      </svg>
+    );
+  }
+  if (normalized.includes("cleaning") || normalized.includes("polishing") || normalized.includes("whitening") || normalized.includes("brightening")) {
+    return (
+      <svg className="h-4.5 w-4.5 text-amber-500 shrink-0" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
+        <path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M6.34 17.66l-1.41 1.41M19.07 4.93l-1.41 1.41" />
+      </svg>
+    );
+  }
+  if (normalized.includes("x-ray") || normalized.includes("digital") || normalized.includes("radiation")) {
+    return (
+      <svg className="h-4.5 w-4.5 text-blue-600 shrink-0" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
+        <rect x="3" y="3" width="18" height="18" rx="2" ry="2" />
+        <line x1="9" y1="3" x2="9" y2="21" />
+        <line x1="15" y1="3" x2="15" y2="21" />
+        <line x1="3" y1="9" x2="21" y2="9" />
+        <line x1="3" y1="15" x2="21" y2="15" />
+      </svg>
+    );
+  }
+  if (normalized.includes("veneer") || normalized.includes("aesthetic") || normalized.includes("jewel") || normalized.includes("gem") || normalized.includes("crystal") || normalized.includes("gold") || normalized.includes("silver") || normalized.includes("grill")) {
+    return (
+      <svg className="h-4.5 w-4.5 text-rose-500 shrink-0" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
+        <path d="M6 3h12l4 6-10 13L2 9z" />
+        <path d="M11 3 8 9l3 13" />
+        <path d="M13 3 16 9l-3 13" />
+        <path d="M2 9h20" />
+      </svg>
+    );
+  }
+  if (normalized.includes("filling") || normalized.includes("fluoride") || normalized.includes("sealant")) {
+    return (
+      <svg className="h-4.5 w-4.5 text-emerald-600 shrink-0" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
+        <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z" />
+      </svg>
+    );
+  }
+  if (normalized.includes("root canal") || normalized.includes("treatment") || normalized.includes("pain") || normalized.includes("abscess") || normalized.includes("swelling") || normalized.includes("extraction") || normalized.includes("healing") || normalized.includes("post-operative")) {
+    return (
+      <svg className="h-4.5 w-4.5 text-red-500 shrink-0" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
+        <path d="M12 2C6.5 2 2 6.5 2 12s4.5 10 10 10 10-4.5 10-10S17.5 2 12 2zm0 13c-.55 0-1-.45-1-1v-4c0-.55.45-1 1-1s1.45.45 1.45 1v4c0 .55-.45 1-1.45 1z" />
+        <circle cx="12" cy="17" r="1" />
+      </svg>
+    );
+  }
+  if (normalized.includes("crown") || normalized.includes("bridge") || normalized.includes("denture") || normalized.includes("brace") || normalized.includes("retainer") || normalized.includes("aligner")) {
+    return (
+      <svg className="h-4.5 w-4.5 text-slate-700 shrink-0" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
+        <path d="M2 4l3 5 7-6 7 6 3-5v15H2V4z" />
+      </svg>
+    );
+  }
+  
+  // Default general health icon
+  return (
+    <svg className="h-4.5 w-4.5 text-slate-600 shrink-0" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
+      <polyline points="20 6 9 17 4 12" />
+    </svg>
+  );
+};
+
 export default function ServicesPage() {
   const [activeCategory, setActiveCategory] = useState("All");
-  const containerRef = useRef<HTMLDivElement>(null);
 
   const categories = ["All", "Preventive", "Cosmetic", "Restorative", "Surgery", "Orthodontic", "Pediatric", "Aesthetic"];
 
@@ -188,99 +252,10 @@ export default function ServicesPage() {
     ? SERVICES
     : SERVICES.filter((s) => s.badge === activeCategory);
 
-  // Trigger initial onload reveals and ScrollTrigger animations
-  useEffect(() => {
-    const ctx = gsap.context(() => {
-      // 1. Hero Reveal
-      gsap.from(".services-hero-content > *", {
-        opacity: 0,
-        y: 40,
-        duration: 0.8,
-        stagger: 0.15,
-        ease: "power3.out"
-      });
-
-      // 2. Category Tabs Reveal
-      gsap.from(".categories-bar", {
-        opacity: 0,
-        y: 20,
-        duration: 0.8,
-        delay: 0.4,
-        ease: "power2.out"
-      });
-
-      // 3. Expectation section header
-      gsap.from(".expectation-header > *", {
-        scrollTrigger: {
-          trigger: ".expectation-header",
-          start: "top 85%"
-        },
-        opacity: 0,
-        y: 30,
-        duration: 0.6,
-        stagger: 0.1,
-        ease: "power2.out"
-      });
-
-      // 4. Expectation steps timeline
-      gsap.from(".expectation-step", {
-        scrollTrigger: {
-          trigger: ".expectation-steps-grid",
-          start: "top 80%"
-        },
-        opacity: 0,
-        y: 40,
-        duration: 0.7,
-        stagger: 0.2,
-        ease: "power2.out"
-      });
-
-      // 5. FAQ section header
-      gsap.from(".faq-header > *", {
-        scrollTrigger: {
-          trigger: ".faq-header",
-          start: "top 85%"
-        },
-        opacity: 0,
-        y: 30,
-        duration: 0.6,
-        stagger: 0.1,
-        ease: "power2.out"
-      });
-
-      // 6. FAQ items list
-      gsap.from(".faq-item", {
-        scrollTrigger: {
-          trigger: ".faq-items-list",
-          start: "top 80%"
-        },
-        y: 30,
-        duration: 0.6,
-        stagger: 0.1,
-        ease: "power2.out"
-      });
-    }, containerRef);
-
-    return () => ctx.revert();
-  }, []);
-
-  // Category card fade effect when filtering
-  useEffect(() => {
-    const ctx = gsap.context(() => {
-      gsap.fromTo(
-        ".service-card",
-        { opacity: 0, y: 30, scale: 0.97 },
-        { opacity: 1, y: 0, scale: 1, duration: 0.4, stagger: 0.05, ease: "power2.out", clearProps: "all" }
-      );
-    }, containerRef);
-
-    return () => ctx.revert();
-  }, [activeCategory]);
-
   return (
-    <div ref={containerRef} className="flex-1 bg-white text-slate-900 overflow-hidden">
+    <div className="flex-1 bg-white text-slate-900 overflow-hidden">
       {/* Services Hero Header */}
-      <section className="relative overflow-hidden bg-slate-50 pt-24 pb-12 sm:pt-32 sm:pb-20 border-b border-slate-200">
+      <section className="relative overflow-hidden bg-slate-50 pt-32 pb-12 sm:pt-40 sm:pb-20 border-b border-slate-200">
         <div className="absolute inset-0 bg-[radial-gradient(#cfe6fe_1px,transparent_1px)] [background-size:24px_24px] opacity-30" />
         <div className="relative mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 text-center space-y-4 services-hero-content">
           <span className="inline-flex max-w-full items-center gap-2 rounded-none border border-slate-200 bg-white px-3 py-1.5 text-[11px] font-semibold uppercase tracking-[0.16em] text-brand-700 shadow-sm sm:px-4 sm:text-xs sm:tracking-[0.3em]">
@@ -318,7 +293,7 @@ export default function ServicesPage() {
       </section>
 
       {/* Dynamic Services Cards */}
-      <section className="py-14 sm:py-20 bg-slate-50">
+      <section className="py-16 sm:py-24 bg-slate-50">
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
           <div className="grid gap-6 md:grid-cols-2">
             {filteredServices.map((service) => (
@@ -349,12 +324,14 @@ export default function ServicesPage() {
                     </div>
                     <p className="text-sm leading-relaxed text-slate-600">{service.description}</p>
                     
-                    {/* Benefits Checklist */}
-                    <div className="space-y-2 pt-2">
+                    {/* Benefits Grid */}
+                    <div className="grid gap-2.5 pt-3.5 border-t border-slate-100">
                       {service.benefits.map((item) => (
-                        <div key={item} className="flex items-start gap-2.5 text-xs text-slate-600">
-                          <span className="h-4 w-4 bg-slate-100 text-slate-900 flex items-center justify-center flex-shrink-0 font-bold font-mono">✓</span>
-                          <span>{item}</span>
+                        <div key={item} className="flex items-center gap-3 bg-slate-50 border border-slate-200/50 p-2.5 transition-all duration-200 hover:bg-slate-100 hover:border-slate-300">
+                          <div className="flex h-8 w-8 shrink-0 items-center justify-center rounded-none bg-white border border-slate-200 shadow-[0_1px_2px_rgba(0,0,0,0.03)] text-slate-900">
+                            {getBenefitIcon(item, service.id)}
+                          </div>
+                          <span className="text-xs font-semibold text-slate-800 leading-tight line-clamp-1">{item}</span>
                         </div>
                       ))}
                     </div>
@@ -362,13 +339,23 @@ export default function ServicesPage() {
                 </div>
 
                 {/* Actions Bar */}
-                <div className="p-6 sm:p-8 pt-0 border-t border-slate-100 flex items-center justify-end gap-4 mt-4">
+                <div className="p-6 sm:p-8 pt-0 border-t border-slate-100 flex items-center justify-between gap-4 mt-4">
                   <Link
-                    href={`?booking=open&service=${encodeURIComponent(service.title)}`}
-                    className="inline-flex w-full items-center justify-center gap-1 border border-slate-200 px-4 py-3 text-center text-xs font-bold uppercase tracking-[0.08em] text-brand-600 transition hover:border-brand-200 hover:text-brand-800 sm:w-auto sm:border-0 sm:px-0 sm:py-0 sm:tracking-wider"
+                    href={`/?booking=open&service=${encodeURIComponent(service.title)}`}
+                    className="inline-flex items-center justify-center text-xs font-bold uppercase tracking-wider text-slate-500 hover:text-slate-900 transition-colors"
                   >
-                    Book This Service &rarr;
+                    Standard Booking &rarr;
                   </Link>
+                  <button
+                    onClick={() => {
+                      const number = "971542575730";
+                      const text = `Hi! I'm interested in inquiring about your "${service.title}" service at FS Pinoy Dental Clinic. Could you tell me more about pricing and slots?`;
+                      window.open(`https://wa.me/${number}?text=${encodeURIComponent(text)}`, "_blank");
+                    }}
+                    className="group inline-flex items-center justify-center gap-2 border border-slate-200 bg-brand-50/50 hover:bg-brand-50 px-4 py-2.5 text-xs font-bold uppercase tracking-wider text-brand-600 hover:border-brand-200 transition duration-200"
+                  >
+                    Inquire on WhatsApp
+                  </button>
                 </div>
               </div>
             ))}

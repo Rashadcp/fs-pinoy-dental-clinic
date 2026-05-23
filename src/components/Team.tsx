@@ -1,15 +1,10 @@
 "use client";
  
-import React, { useEffect, useRef } from "react";
+import React from "react";
 import Link from "next/link";
 import Image from "next/image";
-import { gsap } from "gsap";
-import { ScrollTrigger } from "gsap/ScrollTrigger";
+import { motion } from "framer-motion";
 import { ArrowRightIcon } from "./Icons";
-
-if (typeof window !== "undefined") {
-  gsap.registerPlugin(ScrollTrigger);
-}
  
 interface TeamMember {
   name: string;
@@ -44,45 +39,16 @@ const MEMBERS: TeamMember[] = [
 ];
  
 export default function Team() {
-  const containerRef = useRef<HTMLDivElement>(null);
-
-  useEffect(() => {
-    const ctx = gsap.context(() => {
-      const tl = gsap.timeline({
-        scrollTrigger: {
-          trigger: containerRef.current,
-          start: "top 85%",
-          toggleActions: "play none none none"
-        }
-      });
-
-      tl.from(".team-header", {
-        opacity: 0,
-        y: 35,
-        duration: 0.75,
-        ease: "power2.out"
-      })
-      .from(".team-card", {
-        y: 40,
-        duration: 0.8,
-        stagger: 0.2,
-        ease: "power2.out"
-      }, "-=0.45")
-      .from(".team-cta", {
-        opacity: 0,
-        y: 20,
-        duration: 0.6,
-        ease: "power2.out"
-      }, "-=0.4");
-    }, containerRef);
-
-    return () => ctx.revert();
-  }, []);
-
   return (
-    <section ref={containerRef} id="team" className="bg-slate-50 py-12 sm:py-14 md:py-18 border-t border-slate-200">
+    <section id="team" className="bg-slate-50 py-20 sm:py-24 lg:py-28 border-t border-slate-200">
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-        <div className="max-w-3xl space-y-2.5 text-center mx-auto mb-10 team-header">
+        <motion.div
+          initial={{ opacity: 0, y: 30 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true, margin: "-100px" }}
+          transition={{ duration: 0.6, ease: "easeOut" }}
+          className="max-w-3xl space-y-2.5 text-center mx-auto mb-10 team-header"
+        >
           <span className="inline-flex max-w-full items-center gap-2 rounded-none border border-slate-200 bg-white px-3 py-1.5 text-[11px] font-semibold uppercase tracking-[0.16em] text-slate-600 sm:px-4 sm:text-xs sm:tracking-[0.3em]">
             Clinical Specialists
           </span>
@@ -92,12 +58,16 @@ export default function Team() {
           <p className="text-base leading-relaxed text-slate-600">
             Our team combines licensed clinical expertise with clear communication and professional care.
           </p>
-        </div>
+        </motion.div>
  
         <div className="grid gap-6 md:grid-cols-3 max-w-6xl mx-auto">
-          {MEMBERS.map((member) => (
-            <div
+          {MEMBERS.map((member, index) => (
+            <motion.div
               key={member.name}
+              initial={{ opacity: 0, y: 35 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true, margin: "-80px" }}
+              transition={{ duration: 0.6, delay: index * 0.12, ease: "easeOut" }}
               className="group overflow-hidden rounded-none border border-slate-200 bg-white shadow-sm hover:shadow-md transition-all duration-300 team-card"
             >
               <div className="overflow-hidden border-b border-slate-200 bg-brand-50/65 relative h-72 sm:h-80">
@@ -119,11 +89,17 @@ export default function Team() {
                 <h3 className="text-xl font-extrabold text-slate-950">{member.name}</h3>
                 <p className="text-sm leading-relaxed text-slate-600 min-h-[48px]">{member.focus}</p>
               </div>
-            </div>
+            </motion.div>
           ))}
         </div>
  
-        <div className="mt-12 text-center team-cta">
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.5, delay: 0.2 }}
+          className="mt-12 text-center team-cta"
+        >
           <Link
             href="/team"
             className="inline-flex w-full items-center justify-center gap-2 rounded-none bg-slate-900 px-6 py-3.5 text-xs font-semibold uppercase tracking-[0.08em] text-white transition hover:bg-slate-800 shadow-[0_4px_14px_rgba(15,23,42,0.15)] cursor-pointer sm:w-auto sm:px-8 sm:text-sm sm:tracking-[0.12em]"
@@ -131,7 +107,7 @@ export default function Team() {
             Meet Our Certified Specialists
             <ArrowRightIcon className="h-4 w-4" />
           </Link>
-        </div>
+        </motion.div>
       </div>
     </section>
   );

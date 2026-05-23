@@ -87,7 +87,7 @@ export default function RootLayout({
   return (
     <html
       lang="en"
-      className={`${inter.variable} h-full antialiased scroll-smooth`}
+      className={`${inter.variable} h-full antialiased scroll-smooth overflow-x-hidden`}
     >
       <head>
         <script

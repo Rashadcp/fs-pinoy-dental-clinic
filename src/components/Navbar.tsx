@@ -65,42 +65,41 @@ export default function Navbar({ onOpenBooking }: NavbarProps) {
 
   return (
     <header
-      className={`fixed top-0 z-50 w-full transition-all duration-500 ease-in-out ${
-        scrolled ? "pt-4 px-4 sm:px-6 lg:px-8" : "pt-0"
+      className={`fixed top-0 z-50 w-full min-h-fit transition-all duration-300 ease-in-out ${
+        scrolled 
+          ? "pt-0 px-0 md:pt-4 md:px-6 lg:px-8" 
+          : "pt-4 px-0 md:pt-6 md:px-6 lg:px-8"
       }`}
     >
       <div
-        className={`mx-auto flex items-center justify-between gap-4 transition-all duration-500 ease-in-out ${
+        className={`mx-auto flex items-center transition-all duration-300 ease-in-out ${
           scrolled
-            ? "max-w-5xl rounded-full bg-white/60 px-6 py-2.5 shadow-[0_8px_30px_rgb(0,0,0,0.06)] backdrop-blur-md"
-            : "max-w-7xl bg-transparent px-4 py-4 sm:px-6 lg:px-8"
+            ? "w-full max-w-full md:max-w-5xl rounded-none md:rounded-full bg-white/90 md:bg-white/60 px-5 py-4 md:px-6 md:py-3 shadow-[0_8px_30px_rgb(0,0,0,0.06)] backdrop-blur-md"
+            : "w-full max-w-7xl bg-transparent px-5 py-4 sm:px-8 sm:py-5 lg:px-12 lg:py-5"
         }`}
       >
-        <Link href="/" className="flex items-center gap-3 font-semibold text-slate-900 text-lg tracking-tight">
-          <Image src="/fs-pinoy-logo.png" alt="FS Pinoy Dental Clinic" width={160} height={40} className={`w-auto object-contain transition-all duration-500 ${scrolled ? "h-8" : "h-10"}`} priority />
+        <Link href="/" className="flex flex-shrink-0 items-center gap-3 font-semibold text-slate-900 text-lg tracking-tight">
+          <Image src="/fs-pinoy-logo.png" alt="FS Pinoy Dental Clinic" width={160} height={40} className={`w-auto object-contain transition-all duration-500 ${scrolled ? "h-7 min-[350px]:h-8" : "h-8 min-[350px]:h-10"}`} priority />
         </Link>
 
-        <nav className="hidden items-center gap-8 md:flex">
-          {navLinks.map((link) => {
-            const isActive = currentActive === link.name;
-            return (
-              <Link
-                key={link.name}
-                href={link.href}
-                className={`text-sm font-semibold transition ${isActive ? "text-brand-500" : "text-slate-600 hover:text-brand-600"}`}
-              >
-                {link.name}
-              </Link>
-            );
-          })}
-        </nav>
-
-        <div className="hidden md:flex items-center gap-4">
+        <div className="hidden md:flex items-center gap-6 lg:gap-8 ml-auto">
+          <nav className="flex items-center gap-6 lg:gap-8">
+            {navLinks.map((link) => {
+              const isActive = currentActive === link.name;
+              return (
+                <Link
+                  key={link.name}
+                  href={link.href}
+                  className={`text-sm font-semibold transition ${isActive ? "text-brand-500" : "text-slate-600 hover:text-brand-600"}`}
+                >
+                  {link.name}
+                </Link>
+              );
+            })}
+          </nav>
           <button
             onClick={onOpenBooking}
-            className={`bg-brand-500 px-5 py-2.5 text-sm font-semibold text-white transition hover:bg-brand-600 ${
-              scrolled ? "rounded-full" : "rounded-none"
-            }`}
+            className="bg-brand-500 px-6 py-2.5 text-sm font-semibold text-white transition hover:bg-brand-600 rounded-full flex-shrink-0"
           >
             Book Appointment
           </button>
@@ -108,7 +107,7 @@ export default function Navbar({ onOpenBooking }: NavbarProps) {
 
         <button
           onClick={() => setIsOpen(!isOpen)}
-          className="md:hidden text-slate-900"
+          className="ml-auto md:hidden text-slate-900 p-2 rounded-lg hover:bg-slate-100 focus:outline-none focus:ring-0 transition flex-shrink-0"
           aria-label="Toggle navigation menu"
         >
           {isOpen ? (
@@ -126,11 +125,7 @@ export default function Navbar({ onOpenBooking }: NavbarProps) {
             animate={{ opacity: 1, y: 0 }}
             exit={{ opacity: 0, y: -10 }}
             transition={{ duration: 0.2 }}
-            className={`md:hidden ${
-              scrolled 
-                ? "mx-4 mt-2 overflow-hidden rounded-2xl bg-white/80 shadow-lg backdrop-blur-md sm:mx-6 lg:mx-8" 
-                : "bg-white/95 shadow-lg"
-            }`}
+            className="md:hidden mx-4 mt-2 max-h-[calc(100vh-100px)] overflow-y-auto rounded-2xl bg-white/95 shadow-lg backdrop-blur-md border border-slate-100/30"
           >
             <div className="flex flex-col gap-1 px-4 py-4">
               {navLinks.map((link) => (

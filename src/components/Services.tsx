@@ -1,14 +1,9 @@
 "use client";
 
-import React, { useEffect, useRef } from "react";
-import { gsap } from "gsap";
-import { ScrollTrigger } from "gsap/ScrollTrigger";
+import React from "react";
 import Link from "next/link";
+import { motion } from "framer-motion";
 import { PulseIcon, CheckIcon, ArrowRightIcon } from "./Icons";
-
-if (typeof window !== "undefined") {
-  gsap.registerPlugin(ScrollTrigger);
-}
 
 interface ServiceItem {
   id: string;
@@ -131,51 +126,92 @@ const SERVICES: ServiceItem[] = [
   }
 ];
 
+const getBenefitIcon = (item: string, serviceId: string) => {
+  const normalized = item.toLowerCase();
+  
+  if (normalized.includes("checkup") || normalized.includes("screening")) {
+    return (
+      <svg className="h-4.5 w-4.5 text-teal-600 shrink-0" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
+        <circle cx="11" cy="11" r="8" />
+        <line x1="21" y1="21" x2="16.65" y2="16.65" />
+        <path d="M11 8a3 3 0 0 1 3 3" />
+      </svg>
+    );
+  }
+  if (normalized.includes("cleaning") || normalized.includes("polishing") || normalized.includes("whitening")) {
+    return (
+      <svg className="h-4.5 w-4.5 text-amber-500 shrink-0" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
+        <path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M6.34 17.66l-1.41 1.41M19.07 4.93l-1.41 1.41" />
+      </svg>
+    );
+  }
+  if (normalized.includes("x-ray") || normalized.includes("digital")) {
+    return (
+      <svg className="h-4.5 w-4.5 text-blue-600 shrink-0" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
+        <rect x="3" y="3" width="18" height="18" rx="2" ry="2" />
+        <line x1="9" y1="3" x2="9" y2="21" />
+        <line x1="15" y1="3" x2="15" y2="21" />
+        <line x1="3" y1="9" x2="21" y2="9" />
+        <line x1="3" y1="15" x2="21" y2="15" />
+      </svg>
+    );
+  }
+  if (normalized.includes("veneer") || normalized.includes("aesthetic") || normalized.includes("jewel") || normalized.includes("gem")) {
+    return (
+      <svg className="h-4.5 w-4.5 text-rose-500 shrink-0" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
+        <path d="M6 3h12l4 6-10 13L2 9z" />
+        <path d="M11 3 8 9l3 13" />
+        <path d="M13 3 16 9l-3 13" />
+        <path d="M2 9h20" />
+      </svg>
+    );
+  }
+  if (normalized.includes("filling") || normalized.includes("fluoride") || normalized.includes("sealant")) {
+    return (
+      <svg className="h-4.5 w-4.5 text-emerald-600 shrink-0" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
+        <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z" />
+      </svg>
+    );
+  }
+  if (normalized.includes("root canal") || normalized.includes("treatment") || normalized.includes("pain")) {
+    return (
+      <svg className="h-4.5 w-4.5 text-red-500 shrink-0" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
+        <path d="M12 2C6.5 2 2 6.5 2 12s4.5 10 10 10 10-4.5 10-10S17.5 2 12 2zm0 13c-.55 0-1-.45-1-1v-4c0-.55.45-1 1-1s1.45.45 1.45 1v4c0 .55-.45 1-1.45 1z" />
+        <circle cx="12" cy="17" r="1" />
+      </svg>
+    );
+  }
+  if (normalized.includes("crown") || normalized.includes("bridge")) {
+    return (
+      <svg className="h-4.5 w-4.5 text-slate-700 shrink-0" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
+        <path d="M2 4l3 5 7-6 7 6 3-5v15H2V4z" />
+      </svg>
+    );
+  }
+  
+  // Default general health icon
+  return (
+    <svg className="h-4.5 w-4.5 text-slate-600 shrink-0" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
+      <polyline points="20 6 9 17 4 12" />
+    </svg>
+  );
+};
+
 interface ServicesProps {
   onOpenBookingWithService: (serviceName: string) => void;
 }
 
 export default function Services({ onOpenBookingWithService }: ServicesProps) {
-  const containerRef = useRef<HTMLDivElement>(null);
-
-  useEffect(() => {
-    const ctx = gsap.context(() => {
-      const tl = gsap.timeline({
-        scrollTrigger: {
-          trigger: containerRef.current,
-          start: "top 85%",
-          toggleActions: "play none none none",
-        }
-      });
-
-      tl.from(".services-header", {
-        opacity: 0,
-        y: 35,
-        duration: 0.75,
-        ease: "power2.out"
-      })
-      .from(".service-card", {
-        opacity: 0,
-        y: 45,
-        duration: 0.8,
-        stagger: 0.15,
-        ease: "power2.out"
-      }, "-=0.45")
-      .from(".services-cta", {
-        opacity: 0,
-        y: 20,
-        duration: 0.6,
-        ease: "power2.out"
-      }, "-=0.45");
-    }, containerRef);
-
-    return () => ctx.revert();
-  }, []);
-
   return (
-    <section ref={containerRef} id="services" className="bg-slate-50 py-12 sm:py-14 md:py-18">
+    <section id="services" className="bg-slate-50 py-20 sm:py-24 lg:py-28 border-t border-slate-200">
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-        <div className="max-w-3xl space-y-2.5 text-center mx-auto mb-10 services-header">
+        <motion.div
+          initial={{ opacity: 0, y: 30 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true, margin: "-100px" }}
+          transition={{ duration: 0.6, ease: "easeOut" }}
+          className="max-w-3xl space-y-2.5 text-center mx-auto mb-12 sm:mb-16 services-header"
+        >
           <span className="inline-flex max-w-full items-center gap-2 rounded-none border border-slate-200 bg-white px-3 py-1.5 text-[11px] font-semibold uppercase tracking-[0.16em] text-slate-600 sm:px-4 sm:text-xs sm:tracking-[0.3em]">
             <PulseIcon className="h-4 w-4" />
             Our Services
@@ -186,12 +222,16 @@ export default function Services({ onOpenBookingWithService }: ServicesProps) {
           <p className="text-base leading-relaxed text-slate-600">
             Each service is designed to be straightforward, efficient, and with your comfort in mind. We explain the plan first, then deliver the treatment.
           </p>
-        </div>
-
+        </motion.div>
+ 
         <div className="grid gap-6 md:grid-cols-3">
-          {SERVICES.slice(0, 3).map((service) => (
-            <div
+          {SERVICES.slice(0, 3).map((service, index) => (
+            <motion.div
               key={service.id}
+              initial={{ opacity: 0, y: 35 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true, margin: "-80px" }}
+              transition={{ duration: 0.6, delay: index * 0.12, ease: "easeOut" }}
               className="flex flex-col justify-between overflow-hidden rounded-none border border-slate-200 bg-white shadow-sm hover:shadow-md transition-shadow duration-300 service-card"
             >
               <div>
@@ -208,7 +248,7 @@ export default function Services({ onOpenBookingWithService }: ServicesProps) {
                     </span>
                   </div>
                 </div>
-
+ 
                 <div className="p-6 space-y-4">
                   <h3 className="text-xl font-extrabold tracking-tight text-slate-950 min-h-[56px] flex items-center">
                     {service.title}
@@ -219,34 +259,44 @@ export default function Services({ onOpenBookingWithService }: ServicesProps) {
                   <p className="text-sm leading-relaxed text-slate-600 line-clamp-3">
                     {service.description}
                   </p>
-
-                  <div className="space-y-2 pt-2 border-t border-slate-100">
+ 
+                  <div className="grid gap-2.5 pt-3.5 border-t border-slate-100">
                     {service.benefits.slice(0, 3).map((item) => (
-                      <div key={item} className="flex items-start gap-2.5 text-xs text-slate-600">
-                        <span className="mt-0.5 h-4 w-4 flex-none rounded-none bg-slate-100 text-slate-900 grid place-items-center">
-                          <CheckIcon className="h-3 w-3" />
-                        </span>
-                        <span className="line-clamp-1">{item}</span>
+                      <div key={item} className="flex items-center gap-3 bg-slate-50 border border-slate-200/50 p-2.5 transition-all duration-200 hover:bg-slate-100 hover:border-slate-300">
+                        <div className="flex h-8 w-8 shrink-0 items-center justify-center rounded-none bg-white border border-slate-200 shadow-[0_1px_2px_rgba(0,0,0,0.03)] text-slate-900">
+                          {getBenefitIcon(item, service.id)}
+                        </div>
+                        <span className="text-xs font-semibold text-slate-800 leading-tight line-clamp-1">{item}</span>
                       </div>
                     ))}
                   </div>
                 </div>
               </div>
-
+ 
               <div className="p-6 pt-0">
                 <button
-                  onClick={() => onOpenBookingWithService(service.title)}
+                  onClick={() => {
+                    const number = "971542575730";
+                    const text = `Hi! I'm interested in inquiring about your "${service.title}" service at FS Pinoy Dental Clinic. Could you tell me more about pricing and slots?`;
+                    window.open(`https://wa.me/${number}?text=${encodeURIComponent(text)}`, "_blank");
+                  }}
                   className="group inline-flex w-full items-center justify-center gap-2 border border-slate-200 py-2.5 text-xs font-bold uppercase tracking-wider text-brand-600 hover:bg-brand-50 hover:border-brand-200 transition duration-200 cursor-pointer"
                 >
                   Inquire about this service
                   <ArrowRightIcon className="h-3.5 w-3.5 transition-transform group-hover:translate-x-1" />
                 </button>
               </div>
-            </div>
+            </motion.div>
           ))}
         </div>
-
-        <div className="mt-12 text-center services-cta">
+ 
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.5, delay: 0.2 }}
+          className="mt-12 text-center services-cta"
+        >
           <Link
             href="/services"
             className="inline-flex w-full items-center justify-center gap-2 rounded-none bg-slate-900 px-6 py-3.5 text-xs font-semibold uppercase tracking-[0.08em] text-white transition hover:bg-slate-800 shadow-[0_4px_14px_rgba(15,23,42,0.15)] cursor-pointer sm:w-auto sm:px-8 sm:text-sm sm:tracking-[0.12em]"
@@ -254,7 +304,7 @@ export default function Services({ onOpenBookingWithService }: ServicesProps) {
             Explore All 7 Specialized Services
             <ArrowRightIcon className="h-4 w-4" />
           </Link>
-        </div>
+        </motion.div>
       </div>
     </section>
   );

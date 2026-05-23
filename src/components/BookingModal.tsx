@@ -13,6 +13,7 @@ interface BookingModalProps {
 export default function BookingModal({ isOpen, onClose, selectedService = "" }: BookingModalProps) {
   const [step, setStep] = useState(1);
   const [service, setService] = useState(selectedService);
+  const [prevSelectedService, setPrevSelectedService] = useState(selectedService);
   const [date, setDate] = useState("");
   const [time, setTime] = useState("");
   const [name, setName] = useState("");
@@ -21,11 +22,10 @@ export default function BookingModal({ isOpen, onClose, selectedService = "" }: 
   const [notes, setNotes] = useState("");
   const [isSubmitting, setIsSubmitting] = useState(false);
 
-  useEffect(() => {
-    if (selectedService) {
-      setService(selectedService);
-    }
-  }, [selectedService]);
+  if (selectedService !== prevSelectedService) {
+    setPrevSelectedService(selectedService);
+    setService(selectedService);
+  }
 
   useEffect(() => {
     if (!isOpen) {
