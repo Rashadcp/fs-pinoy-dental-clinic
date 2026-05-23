@@ -1,34 +1,16 @@
 "use client";
 
-import React, { useState, useEffect, useRef } from "react";
+import React, { useEffect, useRef } from "react";
 import { gsap } from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
-import { MarkerIcon, PhoneIcon, EmailIcon, ClockIcon, UserIcon, CheckIcon } from "@/components/Icons";
+import { MarkerIcon, PhoneIcon, EmailIcon, ClockIcon } from "@/components/Icons";
 
 if (typeof window !== "undefined") {
   gsap.registerPlugin(ScrollTrigger);
 }
 
 export default function ContactPage() {
-  const [name, setName] = useState("");
-  const [email, setEmail] = useState("");
-  const [phone, setPhone] = useState("");
-  const [subject, setSubject] = useState("");
-  const [message, setMessage] = useState("");
-  const [isSubmitting, setIsSubmitting] = useState(false);
-  const [isSuccess, setIsSuccess] = useState(false);
-
   const containerRef = useRef<HTMLDivElement>(null);
-
-  const handleSubmit = (e: React.FormEvent) => {
-    e.preventDefault();
-    setIsSubmitting(true);
-    // Simulate submission
-    setTimeout(() => {
-      setIsSubmitting(false);
-      setIsSuccess(true);
-    }, 1200);
-  };
 
   useEffect(() => {
     const ctx = gsap.context(() => {
@@ -93,7 +75,7 @@ export default function ContactPage() {
           </h1>
           
           <p className="max-w-2xl text-base sm:text-lg leading-relaxed text-slate-600 mx-auto">
-            Have questions about bookings, insurance, or customized dental treatments? Fill out the form below or reach out directly. Our friendly team is ready to assist you.
+            Have questions about bookings, insurance, or customized dental treatments? Reach out directly via email, phone, or WhatsApp. Our friendly team is ready to assist you.
           </p>
         </div>
       </section>
@@ -193,134 +175,70 @@ export default function ContactPage() {
           {/* Form & Map Grid */}
           <div className="form-map-grid grid gap-8 lg:grid-cols-12 lg:items-stretch">
             
-            {/* Left Column: Redesigned Premium Contact Form */}
+            {/* Left Column: Contact Info for Static Site */}
             <div className="contact-form-container lg:col-span-7 bg-white border border-slate-200/80 p-6 sm:p-10 shadow-sm flex flex-col justify-between">
               <div>
                 <div className="space-y-2 mb-8">
-                  <h2 className="text-2xl font-bold tracking-tight text-slate-900 sm:text-3xl">Send Us a Message</h2>
-                  <p className="text-sm text-slate-500 leading-relaxed">Fill out the fields below, and our care team will get back to you within 24 hours.</p>
+                  <h2 className="text-2xl font-bold tracking-tight text-slate-900 sm:text-3xl">Contact Our Clinic</h2>
+                  <p className="text-sm text-slate-500 leading-relaxed">
+                    This is a static website, so please reach us directly using email, phone, or WhatsApp. We do not process messages through a backend form on this site.
+                  </p>
                 </div>
 
-                {!isSuccess ? (
-                  <form
-                    onSubmit={handleSubmit}
-                    className="space-y-6 transition-all duration-300 ease-in-out opacity-100"
-                  >
-                    <div className="grid gap-6 sm:grid-cols-2">
-                      {/* Full Name Input */}
-                      <div className="space-y-2">
-                        <span className="block text-xs font-bold uppercase tracking-wider text-slate-500">Full Name</span>
-                        <div className="relative group flex items-center focus-within:text-brand-500 text-slate-400">
-                          <UserIcon className="pointer-events-none absolute left-3.5 h-[18px] w-[18px] transition-colors duration-200 opacity-70 group-focus-within:opacity-100" />
-                          <input
-                            type="text"
-                            required
-                            placeholder="Juan Dela Cruz"
-                            value={name}
-                            onChange={(e) => setName(e.target.value)}
-                            className="w-full rounded-none border border-slate-200 bg-white py-3.5 pl-11 pr-4 text-slate-900 text-sm shadow-sm transition-all duration-200 focus:border-brand-500 focus:outline-none focus:ring-4 focus:ring-brand-500/10 placeholder-muted"
-                          />
-                        </div>
-                      </div>
-
-                      {/* Phone Number Input */}
-                      <div className="space-y-2">
-                        <span className="block text-xs font-bold uppercase tracking-wider text-slate-500">Phone Number</span>
-                        <div className="relative group flex items-center focus-within:text-brand-500 text-slate-400">
-                          <PhoneIcon className="pointer-events-none absolute left-3.5 h-[18px] w-[18px] transition-colors duration-200 opacity-70 group-focus-within:opacity-100" />
-                          <input
-                            type="text"
-                            required
-                            placeholder="054 257 5730"
-                            value={phone}
-                            onChange={(e) => setPhone(e.target.value)}
-                            className="w-full rounded-none border border-slate-200 bg-white py-3.5 pl-11 pr-4 text-slate-900 text-sm shadow-sm transition-all duration-200 focus:border-brand-500 focus:outline-none focus:ring-4 focus:ring-brand-500/10 placeholder-muted"
-                          />
-                        </div>
+                <div className="space-y-6">
+                  <div className="rounded-none border border-slate-200/80 bg-slate-50 p-6">
+                    <div className="flex items-start gap-3">
+                      <EmailIcon className="mt-1 h-5 w-5 text-slate-900" />
+                      <div>
+                        <p className="text-xs uppercase tracking-[0.14em] text-slate-500 font-semibold">Email</p>
+                        <a href="mailto:hello@fspinoydental.com" className="mt-2 block text-sm font-bold text-slate-900 hover:text-brand-700">
+                          hello@fspinoydental.com
+                        </a>
                       </div>
                     </div>
-
-                    {/* Email Address Input */}
-                    <div className="space-y-2">
-                      <span className="block text-xs font-bold uppercase tracking-wider text-slate-500">Email Address</span>
-                      <div className="relative group flex items-center focus-within:text-brand-500 text-slate-400">
-                        <EmailIcon className="pointer-events-none absolute left-3.5 h-[18px] w-[18px] transition-colors duration-200 opacity-70 group-focus-within:opacity-100" />
-                        <input
-                          type="email"
-                          required
-                          placeholder="juan@example.com"
-                          value={email}
-                          onChange={(e) => setEmail(e.target.value)}
-                          className="w-full rounded-none border border-slate-200 bg-white py-3.5 pl-11 pr-4 text-slate-900 text-sm shadow-sm transition-all duration-200 focus:border-brand-500 focus:outline-none focus:ring-4 focus:ring-brand-500/10 placeholder-muted"
-                        />
-                      </div>
-                    </div>
-
-                    {/* Subject Input */}
-                    <div className="space-y-2">
-                      <span className="block text-xs font-bold uppercase tracking-wider text-slate-500">Subject</span>
-                      <input
-                        type="text"
-                        required
-                        placeholder="Inquiry about pricing/treatments"
-                        value={subject}
-                        onChange={(e) => setSubject(e.target.value)}
-                        className="w-full rounded-none border border-slate-200 bg-white px-4 py-3.5 text-slate-900 text-sm shadow-sm transition-all duration-200 focus:border-brand-500 focus:outline-none focus:ring-4 focus:ring-brand-500/10 placeholder-muted"
-                      />
-                    </div>
-
-                    {/* Message Input */}
-                    <div className="space-y-2">
-                      <span className="block text-xs font-bold uppercase tracking-wider text-slate-500">Message</span>
-                      <textarea
-                        required
-                        rows={6}
-                        placeholder="How can we help make you smile today?"
-                        value={message}
-                        onChange={(e) => setMessage(e.target.value)}
-                        className="w-full rounded-none border border-slate-200 bg-white px-4 py-3.5 text-slate-900 text-sm shadow-sm transition-all duration-200 focus:border-brand-500 focus:outline-none focus:ring-4 focus:ring-brand-500/10 placeholder-muted"
-                      />
-                    </div>
-
-                    <button
-                      type="submit"
-                      disabled={isSubmitting}
-                      className="inline-flex w-full items-center justify-center rounded-none bg-slate-950 px-6 py-4 text-xs font-semibold uppercase tracking-[0.08em] text-white transition-all duration-200 hover:bg-slate-800 focus:outline-none focus:ring-2 focus:ring-slate-900 focus:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50 shadow-md hover:shadow-lg sm:text-sm sm:tracking-widest"
-                    >
-                      {isSubmitting ? (
-                        <span className="flex items-center gap-2">
-                          <svg className="animate-spin h-4 w-4 text-white" fill="none" viewBox="0 0 24 24">
-                            <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4" />
-                            <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z" />
-                          </svg>
-                          Sending Message...
-                        </span>
-                      ) : (
-                        "Send Message"
-                      )}
-                    </button>
-                  </form>
-                ) : (
-                  <div
-                    className="py-12 text-center space-y-6 flex-1 flex flex-col justify-center transition-all duration-300 ease-in-out opacity-100"
-                  >
-                    <div className="mx-auto flex h-16 w-16 items-center justify-center rounded-full bg-emerald-500 text-white shadow-lg animate-bounce">
-                      <CheckIcon className="h-7 w-7" />
-                    </div>
-                    <div className="space-y-2">
-                      <h3 className="text-2xl font-bold text-slate-950">Thank You!</h3>
-                      <p className="text-sm leading-relaxed text-slate-600 max-w-md mx-auto font-medium">
-                        Your inquiry has been successfully sent to our clinic. Our staff will review your message and get back to you shortly.
-                      </p>
-                    </div>
-                    <button
-                      onClick={() => setIsSuccess(false)}
-                      className="inline-flex mx-auto rounded-none border border-slate-300 bg-white px-6 py-3 text-xs font-bold uppercase tracking-wider text-slate-600 transition hover:bg-slate-50 shadow-sm"
-                    >
-                      Send Another Message
-                    </button>
                   </div>
-                )}
+
+                  <div className="rounded-none border border-slate-200/80 bg-slate-50 p-6">
+                    <div className="flex items-start gap-3">
+                      <PhoneIcon className="mt-1 h-5 w-5 text-slate-900" />
+                      <div>
+                        <p className="text-xs uppercase tracking-[0.14em] text-slate-500 font-semibold">Phone / WhatsApp</p>
+                        <a href="tel:+971542575730" className="mt-2 block text-sm font-bold text-slate-900 hover:text-brand-700">
+                          +971 54 257 5730
+                        </a>
+                        <p className="mt-1 text-sm text-slate-500">Tap to call or message us on WhatsApp.</p>
+                      </div>
+                    </div>
+                  </div>
+
+                  <div className="rounded-none border border-slate-200/80 bg-slate-50 p-6">
+                    <div className="flex items-start gap-3">
+                      <ClockIcon className="mt-1 h-5 w-5 text-slate-900" />
+                      <div>
+                        <p className="text-xs uppercase tracking-[0.14em] text-slate-500 font-semibold">Clinic Hours</p>
+                        <p className="mt-2 text-sm font-bold text-slate-900">Mon – Sat: 9:00 AM – 5:00 PM</p>
+                        <p className="mt-1 text-sm text-slate-500">Closed on Sundays. Appointments recommended.</p>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
+                <div className="mt-8 grid gap-4 sm:grid-cols-2">
+                  <a
+                    href="mailto:hello@fspinoydental.com"
+                    className="inline-flex items-center justify-center rounded-none bg-slate-950 px-6 py-4 text-xs font-semibold uppercase tracking-[0.08em] text-white transition-all duration-200 hover:bg-slate-800 shadow-md hover:shadow-lg"
+                  >
+                    Send Email
+                  </a>
+                  <a
+                    href="https://wa.me/971542575730?text=Hi%2C%20I%20am%20interested%20in%20your%20dental%20services."
+                    target="_blank"
+                    rel="noreferrer"
+                    className="inline-flex items-center justify-center rounded-none border border-slate-900 bg-white px-6 py-4 text-xs font-semibold uppercase tracking-[0.08em] text-slate-900 transition-all duration-200 hover:border-brand-600 hover:bg-slate-50 shadow-sm"
+                  >
+                    Chat on WhatsApp
+                  </a>
+                </div>
               </div>
             </div>
 
