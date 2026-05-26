@@ -9,29 +9,35 @@ export default function Contact() {
   return (
     <section id="contact" className="bg-slate-50 py-20 sm:py-24 lg:py-28 border-t border-slate-200">
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-        <div className="grid gap-6 sm:gap-10 lg:grid-cols-2 lg:items-start">
-          
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true, margin: "-100px" }}
+          transition={{ duration: 0.7, ease: "easeOut" }}
+          className="mb-10 sm:mb-12 lg:mb-16 space-y-6"
+        >
+          <div className="inline-flex items-center gap-3 text-xs font-semibold uppercase tracking-[0.16em] text-slate-500 sm:text-sm sm:tracking-[0.3em]">
+            <ShieldCheckIcon className="h-4 w-4" />
+            Find Our Clinic
+          </div>
+          <div className="space-y-2.5">
+            <h2 className="text-3xl font-extrabold tracking-tight text-slate-950 sm:text-5xl">
+              We&apos;re here to help you feel at home.
+            </h2>
+            <p className="max-w-2xl text-base leading-relaxed text-slate-600">
+              Have questions about treatments, pricing, or bookings? Reach out now and we&apos;ll respond promptly.
+            </p>
+          </div>
+        </motion.div>
+
+        <div className="grid gap-6 sm:gap-10 lg:grid-cols-2 lg:items-stretch">
           <motion.div
             initial={{ opacity: 0, x: -40 }}
             whileInView={{ opacity: 1, x: 0 }}
             viewport={{ once: true, margin: "-100px" }}
             transition={{ duration: 0.7, ease: "easeOut" }}
-            className="space-y-6 contact-left"
+            className="grid gap-3 sm:gap-3.5 contact-left content-start"
           >
-            <div className="inline-flex items-center gap-3 text-xs font-semibold uppercase tracking-[0.16em] text-slate-500 sm:text-sm sm:tracking-[0.3em]">
-              <ShieldCheckIcon className="h-4 w-4" />
-              Find Our Clinic
-            </div>
-            <div className="space-y-2.5">
-              <h2 className="text-3xl font-extrabold tracking-tight text-slate-950 sm:text-5xl">
-                We&apos;re here to help you feel at home.
-              </h2>
-              <p className="max-w-2xl text-base leading-relaxed text-slate-600">
-                Have questions about treatments, pricing, or bookings? Reach out now and we&apos;ll respond promptly.
-              </p>
-            </div>
-
-            <div className="grid gap-3 sm:gap-3.5">
               <div className="rounded-none border border-slate-200 bg-white p-4 sm:p-5">
                 <div className="flex items-start gap-3 text-slate-950 mb-2 sm:gap-4">
                   <div className="flex h-11 w-11 flex-shrink-0 self-start items-center justify-center rounded-none bg-slate-900 text-white">
@@ -82,7 +88,6 @@ export default function Contact() {
                 </div>
                 <p className="text-sm text-slate-500">Appointment scheduling is recommended to ensure a timely visit.</p>
               </div>
-            </div>
           </motion.div>
 
           <motion.div
@@ -90,17 +95,17 @@ export default function Contact() {
             whileInView={{ opacity: 1, x: 0 }}
             viewport={{ once: true, margin: "-100px" }}
             transition={{ duration: 0.7, ease: "easeOut" }}
-            className="rounded-none border border-slate-200 bg-white p-4 sm:p-5 shadow-sm contact-right"
+            className="rounded-none border border-slate-200 bg-white p-4 sm:p-5 shadow-sm contact-right flex flex-col h-full"
           >
-            <div className="mb-4 rounded-none border border-slate-200 bg-slate-950 px-4 py-4 text-center text-white">
+            <div className="mb-4 rounded-none border border-slate-200 bg-slate-950 px-4 py-4 text-center text-white shrink-0">
               <p className="text-xs uppercase tracking-[0.3em]">Clinic Map</p>
               <p className="mt-1.5 text-lg font-semibold">Al Satwa, Dubai</p>
             </div>
-            <div className="h-64 sm:h-80 overflow-hidden rounded-none bg-slate-900">
+            <div className="h-64 sm:h-80 lg:h-auto lg:flex-1 overflow-hidden rounded-none bg-slate-900 flex flex-col min-h-[250px]">
               <iframe
                 title="FS Pinoy Dental Clinic location"
                 src="https://maps.google.com/maps?q=Ajmal%20Perfume%20Building,%20Al%20Satwa,%20Dubai&t=&z=15&ie=UTF8&iwloc=&output=embed"
-                className="h-full w-full border-0"
+                className="h-full w-full flex-1 border-0"
                 loading="lazy"
                 referrerPolicy="no-referrer-when-downgrade"
               />
@@ -109,7 +114,7 @@ export default function Contact() {
               href="https://www.google.com/maps/search/?api=1&query=Ajmal+Perfume+Building,+Al+Satwa,+Dubai"
               target="_blank"
               rel="noreferrer"
-              className="mt-4 inline-flex w-full items-center justify-center rounded-none bg-slate-900 px-6 py-3 text-sm font-semibold uppercase tracking-[0.12em] text-white transition hover:bg-slate-800"
+              className="mt-4 inline-flex w-full shrink-0 items-center justify-center rounded-none bg-slate-900 px-6 py-3 text-sm font-semibold uppercase tracking-[0.12em] text-white transition hover:bg-slate-800"
             >
               Open in Maps
             </a>

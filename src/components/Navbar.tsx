@@ -40,12 +40,12 @@ export default function Navbar({ onOpenBooking }: NavbarProps) {
             section === "home"
               ? "Home"
               : section === "services"
-              ? "Services"
-              : section === "about"
-              ? "About Us"
-              : section === "team"
-              ? "Team"
-              : "Contact"
+                ? "Services"
+                : section === "about"
+                  ? "About Us"
+                  : section === "team"
+                    ? "Team"
+                    : "Contact"
           );
         }
       });
@@ -58,32 +58,30 @@ export default function Navbar({ onOpenBooking }: NavbarProps) {
 
   const currentActive = pathname === "/" ? active : (
     pathname === "/about" ? "About Us" :
-    pathname === "/services" ? "Services" :
-    pathname === "/team" ? "Team" :
-    pathname === "/contact" ? "Contact" : ""
+      pathname === "/services" ? "Services" :
+        pathname === "/team" ? "Team" :
+          pathname === "/contact" ? "Contact" : ""
   );
 
   return (
     <header
-      className={`fixed top-0 z-50 w-full min-h-fit transition-all duration-300 ease-in-out ${
-        scrolled 
-          ? "pt-0 px-0 md:pt-4 md:px-6 lg:px-8" 
-          : "pt-4 px-0 md:pt-6 md:px-6 lg:px-8"
-      }`}
+      className={`fixed top-0 z-50 w-full min-h-fit transition-all duration-300 ease-in-out ${scrolled
+          ? "pt-0 px-0 md:pt-4 md:px-6 lg:px-8 bg-white/80 backdrop-blur-md md:bg-transparent md:backdrop-blur-none"
+          : "pt-4 px-0 md:pt-6 md:px-0 lg:px-0"
+        }`}
     >
       <div
-        className={`mx-auto flex items-center transition-all duration-300 ease-in-out ${
-          scrolled
-            ? "w-full max-w-full md:max-w-5xl rounded-none md:rounded-full bg-white/90 md:bg-white/60 px-5 py-4 md:px-6 md:py-3 shadow-[0_8px_30px_rgb(0,0,0,0.06)] backdrop-blur-md"
-            : "w-full max-w-7xl bg-transparent px-5 py-4 sm:px-8 sm:py-5 lg:px-12 lg:py-5"
-        }`}
+        className={`mx-auto transition-all duration-300 ease-in-out ${scrolled
+            ? "flex items-center w-full max-w-full md:max-w-3xl rounded-none md:rounded-full bg-white/70 md:bg-white/75 backdrop-blur-md px-4 sm:px-6 py-3 md:px-6 md:py-3 shadow-[0_8px_30px_rgb(0,0,0,0.06)]"
+            : "flex items-center lg:grid lg:grid-cols-12 lg:gap-8 w-full max-w-[1720px] bg-transparent px-4 py-4 sm:px-6 sm:py-5 lg:px-11 lg:py-5"
+          }`}
       >
-        <Link href="/" className="flex flex-shrink-0 items-center gap-3 font-semibold text-slate-900 text-lg tracking-tight">
-          <Image src="/fs-pinoy-logo.png" alt="FS Pinoy Dental Clinic" width={160} height={40} className={`w-auto object-contain transition-all duration-500 ${scrolled ? "h-7 min-[350px]:h-8" : "h-8 min-[350px]:h-10"}`} priority />
+        <Link href="/" className={`flex flex-shrink-0 items-center gap-3 font-semibold text-slate-900 text-lg tracking-tight -ml-4 ${scrolled ? "" : "lg:col-span-7 lg:-ml-[20px]"}`}>
+          <Image src="/fs-pinoy-logo.png" alt="FS Pinoy Dental Clinic" width={300} height={80} className={`w-auto object-contain transition-all duration-500 ${scrolled ? "h-8 min-[350px]:h-8" : "h-5 min-[300px]:h-10.5"}`} priority />
         </Link>
 
-        <div className="hidden md:flex items-center gap-6 lg:gap-8 ml-auto">
-          <nav className="flex items-center gap-6 lg:gap-8">
+        <div className={`hidden md:flex items-center ml-auto ${scrolled ? "gap-5 lg:gap-5" : "lg:col-span-5 lg:w-full lg:justify-between"}`}>
+          <nav className={`flex items-center ${scrolled ? "gap-6 lg:gap-8" : "lg:w-full lg:justify-between lg:pr-8 gap-6"}`}>
             {navLinks.map((link) => {
               const isActive = currentActive === link.name;
               return (
@@ -99,7 +97,7 @@ export default function Navbar({ onOpenBooking }: NavbarProps) {
           </nav>
           <button
             onClick={onOpenBooking}
-            className="bg-brand-500 px-6 py-2.5 text-sm font-semibold text-white transition hover:bg-brand-600 rounded-full flex-shrink-0"
+            className="bg-brand-500 px-4 py-2.5 text-sm font-semibold text-white transition hover:bg-brand-400 rounded-full flex-shrink-0"
           >
             Book Appointment
           </button>
@@ -125,7 +123,7 @@ export default function Navbar({ onOpenBooking }: NavbarProps) {
             animate={{ opacity: 1, y: 0 }}
             exit={{ opacity: 0, y: -10 }}
             transition={{ duration: 0.2 }}
-            className="md:hidden mx-4 mt-2 max-h-[calc(100vh-100px)] overflow-y-auto rounded-2xl bg-white/95 shadow-lg backdrop-blur-md border border-slate-100/30"
+            className="md:hidden mx-4 mt-2 max-h-[calc(100vh-100px)] overflow-y-auto rounded-xl bg-white shadow-lg border border-slate-100"
           >
             <div className="flex flex-col gap-1 px-4 py-4">
               {navLinks.map((link) => (
@@ -135,7 +133,7 @@ export default function Navbar({ onOpenBooking }: NavbarProps) {
                   onClick={() => {
                     setIsOpen(false);
                   }}
-                  className={`rounded-xl px-3 py-3 text-sm font-semibold transition ${currentActive === link.name ? "bg-brand-50 text-brand-700" : "text-slate-600 hover:bg-slate-50"}`}
+                  className={`rounded-sm px-3 py-3 text-sm font-semibold transition ${currentActive === link.name ? "bg-brand-50 text-brand-700" : "text-slate-600 hover:bg-slate-50"}`}
                 >
                   {link.name}
                 </Link>
@@ -145,7 +143,7 @@ export default function Navbar({ onOpenBooking }: NavbarProps) {
                   setIsOpen(false);
                   onOpenBooking();
                 }}
-                className="mt-3 rounded-xl bg-brand-500 px-4 py-3 text-sm font-semibold text-white transition hover:bg-brand-600"
+                className="mt-3 rounded-sm bg-brand-500 px-4 py-3 text-sm font-semibold text-white transition hover:bg-brand-600"
               >
                 Book Appointment
               </button>
@@ -156,5 +154,3 @@ export default function Navbar({ onOpenBooking }: NavbarProps) {
     </header>
   );
 }
-
-

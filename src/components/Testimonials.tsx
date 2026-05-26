@@ -53,28 +53,12 @@ const REVIEWS: ReviewItem[] = [
   }
 ];
 
-const containerVariants: Variants = {
-  hidden: { opacity: 0 },
-  visible: {
-    opacity: 1,
-    transition: {
-      staggerChildren: 0.12,
-    },
-  },
-};
-
-const cardVariants: Variants = {
-  hidden: { opacity: 0, y: 30 },
-  visible: {
-    opacity: 1,
-    y: 0,
-    transition: { duration: 0.6, ease: "easeOut" },
-  },
-};
-
 export default function Testimonials() {
+  // Triple the reviews array to ensure the viewport is completely filled and the loop is perfectly seamless.
+  const scrolledReviews = [...REVIEWS, ...REVIEWS, ...REVIEWS];
+
   return (
-    <section id="reviews" className="bg-white py-16 sm:py-20 md:py-24 border-t border-slate-200">
+    <section id="reviews" className="bg-white py-20 sm:py-24 lg:py-28 border-t border-slate-200 overflow-hidden">
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
         
         {/* Header */}
@@ -83,7 +67,7 @@ export default function Testimonials() {
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true, margin: "-100px" }}
           transition={{ duration: 0.6, ease: "easeOut" }}
-          className="max-w-3xl text-center mx-auto mb-12 sm:mb-16 testimonials-header"
+          className="max-w-3xl text-center mx-auto mb-10 sm:mb-14 testimonials-header"
         >
           <span className="inline-flex max-w-full items-center gap-2 rounded-none border border-slate-200 bg-slate-50 px-3 py-1.5 text-[11px] font-semibold uppercase tracking-[0.16em] text-slate-600 sm:px-4 sm:text-xs sm:tracking-[0.3em]">
             <ChatIcon className="h-4 w-4" />
@@ -96,52 +80,55 @@ export default function Testimonials() {
             Honest feedback from patients who experienced our gentle care firsthand.
           </p>
         </motion.div>
+      </div>
 
-        {/* 2x2 Grid of Unique Reviews */}
-        <motion.div
-          variants={containerVariants}
-          initial="hidden"
-          whileInView="visible"
-          viewport={{ once: true, margin: "-80px" }}
-          className="grid gap-6 md:grid-cols-2 lg:gap-8"
+      {/* Infinite Horizontal Scrolling Marquee */}
+      <div className="relative mt-4 sm:mt-8 w-full overflow-hidden py-4">
+        {/* Elegant fading visual masks at edges to make reviews blend luxuriously */}
+        <div className="pointer-events-none absolute left-0 top-0 bottom-0 z-10 w-16 sm:w-32 bg-gradient-to-r from-white to-transparent" />
+        <div className="pointer-events-none absolute right-0 top-0 bottom-0 z-10 w-16 sm:w-32 bg-gradient-to-l from-white to-transparent" />
+
+        {/* Scrolling content wrapper */}
+        <div
+          className="flex w-max gap-6 px-4 animate-[marquee_35s_linear_infinite] hover:[animation-play-state:paused]"
+          style={{ willChange: "transform" }}
         >
-          {REVIEWS.map((review, index) => (
-            <motion.div
+          {scrolledReviews.map((review, index) => (
+            <div
               key={index}
-              variants={cardVariants}
-              className="flex flex-col justify-between rounded-none border border-slate-200 bg-slate-50 p-6 sm:p-8 shadow-[0_4px_12px_rgba(0,0,0,0.01)] hover:shadow-md transition-all duration-300 hover:border-slate-300 hover:-translate-y-1 relative"
+              className="w-[85vw] max-w-[320px] sm:max-w-[380px] shrink-0 flex flex-col justify-between rounded-none border border-slate-200 bg-slate-50 p-6 shadow-[0_4px_12px_rgba(0,0,0,0.01)] hover:shadow-md transition-all duration-300 hover:border-slate-300 hover:-translate-y-1 relative"
             >
               <div>
-                <div className="flex items-center justify-between text-slate-950 mb-4">
-                  <div className="flex gap-1 text-yellow-400">
+                <div className="flex items-center justify-between text-slate-950 mb-3.5">
+                  <div className="flex gap-0.5 text-yellow-400">
                     {Array.from({ length: review.rating }).map((_, i) => (
                       <StarIcon key={i} className="h-4 w-4" />
                     ))}
                   </div>
-                  <QuoteIcon className="h-7 w-7 opacity-20 text-slate-400" />
+                  <QuoteIcon className="h-6 w-6 opacity-20 text-slate-400" />
                 </div>
                 
-                <h3 className="text-lg font-bold text-slate-950 tracking-tight mb-2">
+                <h3 className="text-base font-bold text-slate-950 tracking-tight mb-2 line-clamp-1">
                   &ldquo;{review.quote}&rdquo;
                 </h3>
-                <p className="text-sm leading-relaxed text-slate-600">
+                <p className="text-xs sm:text-sm leading-relaxed text-slate-600 line-clamp-3">
                   {review.story}
                 </p>
               </div>
 
-              <div className="mt-6 border-t border-slate-200/80 pt-4 flex items-center gap-3">
+              <div className="mt-5 border-t border-slate-200/80 pt-3.5 flex items-center gap-3">
                 {/* Initial-based circular avatar */}
-                <div className={`flex h-10 w-10 shrink-0 items-center justify-center rounded-full border text-xs font-bold ${review.avatarBg}`}>
+                <div className={`flex h-9 w-9 shrink-0 items-center justify-center rounded-full border text-xs font-bold ${review.avatarBg}`}>
                   {review.avatarText}
                 </div>
                 <div>
-                  <p className="text-sm font-bold text-slate-950">{review.name}</p>
-                  <p className="text-xs font-semibold uppercase tracking-wider text-slate-400">{review.location}</p>
+                  <p className="text-xs sm:text-sm font-bold text-slate-950">{review.name}</p>
+                  <p className="text-[10px] font-semibold uppercase tracking-wider text-slate-400">{review.location}</p>
                 </div>
               </div>
-            </motion.div>
+            </div>
           ))}
-        </motion.div>
+        </div>
       </div>
     </section>
   );
